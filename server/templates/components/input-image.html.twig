@@ -1,0 +1,31 @@
+
+{# Input type image component #}
+
+<div id="input-image-component" class="overflow-h input-image-component-{{ key }}">
+
+    <img 
+        id="img-pic" 
+        class="{{ (image is defined) ? '' : 'hide' }}" 
+        src="{{ (image is defined) ? image : '' }}" 
+        alt="img"
+        data-key="input-image-component-{{ key }}"
+    />
+
+    <input 
+        id="file-upload" 
+        {# class="hide"  #}
+        type="file" 
+        name="{{name}}" 
+        accept="image/*" 
+        value="{{ (picture is defined) ? picture : '' }}"
+        data-key="input-image-component-{{ key }}"
+    />
+
+    <input 
+        type="hidden" 
+        id="srcTmp" 
+        name="{{name}}-tmp" 
+        value="{{ (image is defined) ? image : '' }}" 
+    />
+
+</div>

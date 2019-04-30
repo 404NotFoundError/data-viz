@@ -1,0 +1,10 @@
+
+// Sexy background
+@mixin sexy-background($width, $height) {
+    content:"";
+    display: block;
+    width: $width;
+    height: $height;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}

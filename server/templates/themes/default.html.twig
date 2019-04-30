@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% set theme_id = 'default-theme' %}
+
+{% block theme %}
+
+    {# Header #}
+    {% include '/modules/header.html.twig' %}
+
+    {# Content #}
+    <section class="content">
+    {% block content %}{% endblock %}
+    </section>
+
+    {# Footer #}
+    {% include '/modules/footer.html.twig' %}
+
+{% endblock %}

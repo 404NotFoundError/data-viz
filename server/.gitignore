@@ -1,0 +1,7 @@
+/node_modules
+/public/uploads/*
+/vendor
+/tests
+.env
+phpunit.xml.dist
+/var
