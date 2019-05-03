@@ -1,1 +1,0 @@
-The partials are a dynamic content we need to display without reloading the page.
