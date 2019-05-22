@@ -69,6 +69,7 @@ class MapTest extends React.PureComponent {
 
                 return (
                   <Fragment key={`fragment__${i}`}>
+                  {currentColors.red && (
                     <Layer
                       key={`redLayer__${i}`}
                       type="circle"
@@ -85,6 +86,8 @@ class MapTest extends React.PureComponent {
                         ))
                       }
                     </Layer>
+                  )}
+                  {currentColors.white && (
                     <Layer
                       key={`whiteLayer__${i}`}
                       type="circle"
@@ -101,6 +104,8 @@ class MapTest extends React.PureComponent {
                         ))
                       }
                     </Layer>
+                  )}
+                  {currentColors.pink && (
                     <Layer
                       key={`pinkLayer__${i}`}
                       type="circle"
@@ -117,6 +122,7 @@ class MapTest extends React.PureComponent {
                         ))
                       }
                     </Layer>
+                  )}
                   </Fragment>
                 ); 
               }

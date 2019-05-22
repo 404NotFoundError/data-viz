@@ -108,8 +108,6 @@ class DatavizPage extends Component {
         const currentColors = Object.assign({}, this.state.currentColors);
         currentColors[color] = !this.state.currentColors[color];
 
-        const bool = !this.state.currentColors[color];
-
         const activeFilters = this.state.activeFilters;
         activeFilters.colors = (!currentColors.red && !currentColors.pink && !currentColors.white) ? false : true;
 
