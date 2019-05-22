@@ -34,16 +34,10 @@ class MapTest extends React.PureComponent {
     })
   }
 
-  render() {
-    const { step, zoom, center } = this.state;
+  toRender = () => {
+    const { step } = this.state;
     const { wines, countries, currCountry, changeCurrCountry } = this.props;
 
-    if (!wines.length) return <div>Loading...</div>
-
-    // const lessWines = JSON.parse(wines).wines.slice(0, 100000);
-    // const lessWines = JSON.parse(wines).wines.filter(wine => wine.country === currCountry);
-
-    const ToRender = () => {
 			if (step === "continents") {
 				return (
 					<Fragment>
@@ -64,20 +58,58 @@ class MapTest extends React.PureComponent {
 						{ countries.map((countrie, i) => {
               if (countrie.name === currCountry) {
                 const currCountryWines = wines.filter((wine, i) => (wine.country === currCountry));
+                const redWines = currCountryWines.filter(wine => wine.color === "red");
+                const whiteWines = currCountryWines.filter(wine => wine.color === "white");
+                const pinkWines = currCountryWines.filter(wine => wine.color === "pink");
 
                 return (
-                  <Layer
-                    type="symbol"
-                    id="marker"
-                    layout={{ "icon-image": "marker-15" }}
-                    key={i}
-                  >
-                    {
-                      currCountryWines.map((wine, index) => (
-                        <Feature key={`wine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
-                      ))
-                    }
-                  </Layer>
+                  <Fragment>
+                    <Layer
+                      type="circle"
+                      paint={
+                        {
+                          "circle-color": "#D71140",
+                          "circle-radius": 3
+                        }
+                      }
+                    >
+                      {
+                        redWines.map((wine, index) => (
+                          <Feature key={`wine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
+                        ))
+                      }
+                    </Layer>
+                    <Layer
+                      type="circle"
+                      paint={
+                        {
+                          "circle-color": "#FFE8B5",
+                          "circle-radius": 3
+                        }
+                      }
+                    >
+                      {
+                        whiteWines.map((wine, index) => (
+                          <Feature key={`wine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
+                        ))
+                      }
+                    </Layer>
+                    <Layer
+                      type="circle"
+                      paint={
+                        {
+                          "circle-color": "#EE98AC",
+                          "circle-radius": 3
+                        }
+                      }
+                    >
+                      {
+                        pinkWines.map((wine, index) => (
+                          <Feature key={`wine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
+                        ))
+                      }
+                    </Layer>
+                  </Fragment>
                 ); 
               }
 
@@ -104,17 +136,20 @@ class MapTest extends React.PureComponent {
       }
       return (
         <Layer
-          type="symbol"
-          id="marker"
-          layout={{ "icon-image": "marker-15" }}
+          type="heatmap"
         >
           { wines.map((wine, i) => (
-              <Feature coordinates={[wine.longitude, wine.latitude]} />
-              // <Feature coordinates={[wine.longitude, wine.latitude]} iconIgnorePlacement={true} />
+              <Feature coordinates={[wine.longitude, wine.latitude]}/>
           ))}
         </Layer>
       )
     }
+
+  render() {
+    const { zoom, center } = this.state;
+    const { wines } = this.props;
+
+    if (!wines.length) return <div>Loading...</div>
 
     return (
       <Map
@@ -125,7 +160,7 @@ class MapTest extends React.PureComponent {
         center={center}
         onClick={(map, e) => console.log(e.lngLat)}
       >
-        <ToRender />
+        {this.toRender()}
       </Map>
     );
   }
