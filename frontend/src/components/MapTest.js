@@ -80,12 +80,22 @@ class MapTest extends React.PureComponent {
                   </Layer>
                 ); 
               }
+
+              const wineNumber = wines.filter(wine => wine.country === countrie.name).length;
+              
+              if (!wineNumber) return null;
+
               return (
                 <Marker
                   key={i}
                   coordinates={[countrie.longitude, countrie.latitude]}
                 >
-                  <ClusterCustom name={countrie.name} changeCurrCountry={changeCurrCountry} changeCenter={() => this.changeCenter(countrie.longitude, countrie.latitude)} />
+                  <ClusterCustom
+                    name={countrie.name}
+                    changeCurrCountry={changeCurrCountry}
+                    changeCenter={() => this.changeCenter(countrie.longitude, countrie.latitude)}
+                    wineNumber={wineNumber}
+                  />
                 </Marker>
               )
             })}
