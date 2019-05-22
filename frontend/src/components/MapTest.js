@@ -34,9 +34,14 @@ class MapTest extends React.PureComponent {
     })
   }
 
+  // componentDidUpdate = prevProps => {
+  //   console.log("prevProps: ", prevProps.currentColors);
+  //   console.log("props: ", this.props.currentColors);
+  // }
+
   toRender = () => {
     const { step } = this.state;
-    const { wines, countries, currCountry, changeCurrCountry } = this.props;
+    const { wines, countries, currCountry, changeCurrCountry, currentColors } = this.props;
 
 			if (step === "continents") {
 				return (
@@ -63,8 +68,9 @@ class MapTest extends React.PureComponent {
                 const pinkWines = currCountryWines.filter(wine => wine.color === "pink");
 
                 return (
-                  <Fragment>
+                  <Fragment key={`fragment__${i}`}>
                     <Layer
+                      key={`redLayer__${i}`}
                       type="circle"
                       paint={
                         {
@@ -75,11 +81,12 @@ class MapTest extends React.PureComponent {
                     >
                       {
                         redWines.map((wine, index) => (
-                          <Feature key={`wine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
+                          <Feature key={`redWine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
                         ))
                       }
                     </Layer>
                     <Layer
+                      key={`whiteLayer__${i}`}
                       type="circle"
                       paint={
                         {
@@ -90,11 +97,12 @@ class MapTest extends React.PureComponent {
                     >
                       {
                         whiteWines.map((wine, index) => (
-                          <Feature key={`wine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
+                          <Feature key={`whiteWine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
                         ))
                       }
                     </Layer>
                     <Layer
+                      key={`pinkLayer__${i}`}
                       type="circle"
                       paint={
                         {
@@ -105,7 +113,7 @@ class MapTest extends React.PureComponent {
                     >
                       {
                         pinkWines.map((wine, index) => (
-                          <Feature key={`wine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
+                          <Feature key={`pinkWine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
                         ))
                       }
                     </Layer>
@@ -113,9 +121,20 @@ class MapTest extends React.PureComponent {
                 ); 
               }
 
-              const wineNumber = wines.filter(wine => wine.country === countrie.name).length;
+              const currCountryWines = wines.filter((wine, i) => (wine.country === countrie.name));
+              const redWines = currCountryWines.filter(wine => wine.color === "red");
+              const whiteWines = currCountryWines.filter(wine => wine.color === "white");
+              const pinkWines = currCountryWines.filter(wine => wine.color === "pink");
+
+              const wineNumber = currCountryWines.length;
               
               if (!wineNumber) return null;
+
+              const colorData = [
+                currentColors.red ? redWines.length : 0,
+                currentColors.white ? whiteWines.length : 0,
+                currentColors.white ? pinkWines.length : 0,
+              ];
 
               return (
                 <Marker
@@ -127,6 +146,7 @@ class MapTest extends React.PureComponent {
                     changeCurrCountry={changeCurrCountry}
                     changeCenter={() => this.changeCenter(countrie.longitude, countrie.latitude)}
                     wineNumber={wineNumber}
+                    data={colorData}
                   />
                 </Marker>
               )
@@ -139,7 +159,7 @@ class MapTest extends React.PureComponent {
           type="heatmap"
         >
           { wines.map((wine, i) => (
-              <Feature coordinates={[wine.longitude, wine.latitude]}/>
+              <Feature key={`feature__${i}`} coordinates={[wine.longitude, wine.latitude]}/>
           ))}
         </Layer>
       )

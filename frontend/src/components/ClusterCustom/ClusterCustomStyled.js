@@ -22,6 +22,8 @@ export const ClusterCustomStyled = styled.div`
         border-radius: 50%;
 
         transition: 0.2s ease-in-out;
+
+        border: ${props => props.isColored ? "none" : "1px solid white"};
     }
 `;
 

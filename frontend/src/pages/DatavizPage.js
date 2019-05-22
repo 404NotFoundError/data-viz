@@ -105,15 +105,17 @@ class DatavizPage extends Component {
     }
 
     changeCurrentColors = color => {
-        const currentColors = this.state.currentColors;
+        const currentColors = Object.assign({}, this.state.currentColors);
         currentColors[color] = !this.state.currentColors[color];
+
+        const bool = !this.state.currentColors[color];
 
         const activeFilters = this.state.activeFilters;
         activeFilters.colors = (!currentColors.red && !currentColors.pink && !currentColors.white) ? false : true;
 
         this.setState({
-            currentColors: currentColors,
-            activeFilters: activeFilters
+            currentColors,
+            activeFilters
         })
     }
 
@@ -224,10 +226,6 @@ class DatavizPage extends Component {
         } = this.state;
 
         const winesLength = currCountry ? wines.filter(w => w.country === currCountry).length : wines.length;
-        // console.log("wines: ", wines);
-        // console.log("countries: ", countries);
-        // console.log("TYPE wines: ", typeof wines);
-        // console.log("TYPE countries: ", typeof countries);
 
         return (
             <Fragment>
@@ -238,9 +236,15 @@ class DatavizPage extends Component {
                 }}>
                     <Logo />
                     <SearchIcon toggleSearch={this.toggleSearch} />
-                    <SearchModal isSearchOpen={isSearchOpen} toggleSearch={this.toggleSearch}/>
+                    <SearchModal
+                        isSearchOpen={isSearchOpen}
+                        toggleSearch={this.toggleSearch}
+                    />
                     <CountryIcon toggleCountryModal={this.toggleCountryModal} />
-                    <CountryModal isCountryOpen={isCountryOpen} toggleCountryModal={this.toggleCountryModal}/>
+                    <CountryModal
+                        isCountryOpen={isCountryOpen}
+                        toggleCountryModal={this.toggleCountryModal}
+                    />
                     <FilterTitle
                         titleDisplayed={titleDisplayed}
                         activeFilters={activeFilters}
@@ -259,7 +263,13 @@ class DatavizPage extends Component {
                         updateFilterData={this.updateFilterData}
                         vintage={vintage}
                         />
-                    <MapTest wines={wines} countries={countries} changeCurrCountry={this.changeCurrCountry} currCountry={currCountry}/>
+                    <MapTest
+                        wines={wines}
+                        countries={countries}
+                        changeCurrCountry={this.changeCurrCountry}
+                        currCountry={currCountry}
+                        currentColors={currentColors}
+                    />
                 </div>
             </Fragment>
         );
