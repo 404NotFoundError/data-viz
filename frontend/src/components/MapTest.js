@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import ReactMapboxGl, { Layer, Feature, Marker } from 'react-mapbox-gl';
 import ClusterCustom from './ClusterCustom/ClusterCustom';
+import { Redirect } from 'react-router-dom';
+
 const Map = ReactMapboxGl({
   accessToken: "pk.eyJ1IjoiZ2FtYTk3ODAiLCJhIjoiY2p2NmR3NzA4MDA1NzQzbzdpd3IzNml3NiJ9.uqGMqqnpdiBlrnzWaxMKMg"
 });
@@ -9,8 +11,21 @@ class MapTest extends React.PureComponent {
   state = {
     zoom: [1],
     step: "continents",
-    center: [0.8130060000328854, 46.55886205821483]
+    center: [0.8130060000328854, 46.55886205821483],
+    redirect: null
   };
+
+  setRedirect = id => {
+    this.setState({
+      redirect: id
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to={`single/${this.state.redirect}`} />
+    }
+  }
 
   setStep = e => {
     let step;
@@ -34,10 +49,11 @@ class MapTest extends React.PureComponent {
     })
   }
 
-  // componentDidUpdate = prevProps => {
-  //   console.log("prevProps: ", prevProps.currentColors);
-  //   console.log("props: ", this.props.currentColors);
-  // }
+  mouseOverWine = e => {
+    console.log(e);
+    e.feature.layer.paint["circle-radius"] = 10;
+    document.body.style.cursor = "pointer";
+  }
 
   toRender = () => {
     const { step } = this.state;
@@ -66,6 +82,7 @@ class MapTest extends React.PureComponent {
                 const redWines = currCountryWines.filter(wine => wine.color === "red");
                 const whiteWines = currCountryWines.filter(wine => wine.color === "white");
                 const pinkWines = currCountryWines.filter(wine => wine.color === "pink");
+                const elseWines = currCountryWines.filter(wine => wine.color === "");
 
                 return (
                   <Fragment key={`fragment__${i}`}>
@@ -82,7 +99,12 @@ class MapTest extends React.PureComponent {
                     >
                       {
                         redWines.map((wine, index) => (
-                          <Feature key={`redWine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
+                          <Feature
+                            key={`redWine__${index}`}
+                            coordinates={[wine.longitude, wine.latitude]}
+                            onClick={() => this.setRedirect(wine.id)}
+                            onMouseEnter={e => this.mouseOverWine(e)}
+                          />
                         ))
                       }
                     </Layer>
@@ -100,7 +122,11 @@ class MapTest extends React.PureComponent {
                     >
                       {
                         whiteWines.map((wine, index) => (
-                          <Feature key={`whiteWine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
+                          <Feature
+                            key={`whiteWine__${index}`}
+                            coordinates={[wine.longitude, wine.latitude]}
+                            onClick={() => this.setRedirect(wine.id)}
+                          />
                         ))
                       }
                     </Layer>
@@ -118,7 +144,33 @@ class MapTest extends React.PureComponent {
                     >
                       {
                         pinkWines.map((wine, index) => (
-                          <Feature key={`pinkWine__${index}`} coordinates={[wine.longitude, wine.latitude]} />
+                          <Feature
+                            key={`pinkWine__${index}`}
+                            coordinates={[wine.longitude, wine.latitude]} 
+                            onClick={() => this.setRedirect(wine.id)}
+                          />
+                        ))
+                      }
+                    </Layer>
+                  )}
+                  {currentColors.pink && (
+                    <Layer
+                      key={`elseLayer__${i}`}
+                      type="circle"
+                      paint={
+                        {
+                          "circle-color": "#EE98AC",
+                          "circle-radius": 3
+                        }
+                      }
+                    >
+                      {
+                        elseWines.map((wine, index) => (
+                          <Feature
+                            key={`elsekWine__${index}`}
+                            coordinates={[wine.longitude, wine.latitude]}
+                            onClick={() => this.setRedirect(wine.id)}
+                          />
                         ))
                       }
                     </Layer>
@@ -160,34 +212,39 @@ class MapTest extends React.PureComponent {
 					</Fragment>
 				)
       }
-      return (
-        <Layer
-          type="heatmap"
-        >
-          { wines.map((wine, i) => (
-              <Feature key={`feature__${i}`} coordinates={[wine.longitude, wine.latitude]}/>
-          ))}
-        </Layer>
-      )
+      // return (
+      //   <Layer
+      //     type="heatmap"
+      //   >
+      //     { wines.map((wine, i) => (
+      //         <Feature key={`feature__${i}`} coordinates={[wine.longitude, wine.latitude]}/>
+      //     ))}
+      //   </Layer>
+      // )
     }
 
   render() {
-    const { zoom, center } = this.state;
+    const { zoom, center, redirect } = this.state;
     const { wines } = this.props;
 
     if (!wines.length) return <div>Loading...</div>
 
     return (
-      <Map
-        style="mapbox://styles/gama9780/cjv6bfst903be1fnolsx2eih4"
-        containerStyle={{ width: '100vw', height: '100vh', position: 'absolute', top: 0, left: 0, zIndex: 1 }}
-        onZoom={this.setStep}
-        zoom={zoom}
-        center={center}
-        onClick={(map, e) => console.log(e.lngLat)}
-      >
-        {this.toRender()}
-      </Map>
+      <Fragment>
+        {this.renderRedirect()}
+        {redirect === null && (
+          <Map
+            style="mapbox://styles/gama9780/cjv6bfst903be1fnolsx2eih4"
+            containerStyle={{ width: '100vw', height: '100vh', position: 'absolute', top: 0, left: 0, zIndex: 1 }}
+            onZoom={this.setStep}
+            zoom={zoom}
+            center={center}
+            onClick={(map, e) => console.log(e.lngLat)}
+          >
+            {this.toRender()}
+          </Map>
+        )}
+      </Fragment>
     );
   }
 }
@@ -217,7 +274,7 @@ const continents = [
 	},
 	{
 		latitude: 55.85406929584602,
-		longitude: 28.24904034876191,
+    longitude: 13.206347134378518,
 		name: "Europe"
 	},
 	{
