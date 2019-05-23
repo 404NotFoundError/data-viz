@@ -57,10 +57,21 @@ class MapTest extends React.PureComponent {
 
   toRender = () => {
     const { step } = this.state;
-    const { countries, currCountry, changeCurrCountry, currentColors, vintage } = this.props;
+    const {
+      countries,
+      currCountry,
+      changeCurrCountry,
+      currentColors,
+      vintage,
+      grade,
+      price
+    } = this.props;
     const winesTemp = this.props.wines;
 
-    const wines = winesTemp.filter(wine => (wine.date <= vintage[1]) && wine.date >= vintage[0]);
+    const wines = winesTemp
+      .filter(wine => (wine.date <= vintage[1]) && wine.date >= vintage[0])
+      .filter(wine => (wine.grade <= grade[1]) && wine.grade >= grade[0])
+      .filter(wine => (wine.price <= price[1]) && wine.price >= price[0]);
 
 			if (step === "continents") {
 				return (
@@ -260,7 +271,8 @@ class MapTest extends React.PureComponent {
         {this.renderRedirect()}
         {redirect === null && (
           <Map
-            style="mapbox://styles/gama9780/cjv6bfst903be1fnolsx2eih4"
+            // style="mapbox://styles/gama9780/cjv6bfst903be1fnolsx2eih4"
+            style='mapbox://styles/mapbox/dark-v10'
             containerStyle={{ width: '100vw', height: '100vh', position: 'absolute', top: 0, left: 0, zIndex: 1 }}
             onZoom={this.setStep}
             zoom={zoom}

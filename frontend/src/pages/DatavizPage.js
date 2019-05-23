@@ -67,9 +67,9 @@ class DatavizPage extends Component {
         currentColors: {red: true, pink: true, white: true},
         titleDisplayed: 'World',
         activeFilters: {grade: false, vintage: false, price: false, taste: false, colors: true},
-        grade: [],
+        grade: [80, 99],
         vintage: [1930, 2016],
-        price: [],
+        price: [4, 2500],
         taste: [],
         step: 0,
         currCountry: ""
@@ -86,13 +86,23 @@ class DatavizPage extends Component {
         const countriesRes = await fetch(countriesURL);
         const { countries } = await countriesRes.json();
 
-        const maxYear = Math.max.apply(Math, wines.map(wine => wine.date ));
-        const minYear = Math.min.apply(Math, wines.map(wine => wine.date ));
+        const maxYear = Math.max.apply(Math, wines.map(wine => wine.date));
+        const minYear = Math.min.apply(Math, wines.map(wine => wine.date));
+
+        const maxGrade = Math.max.apply(Math, wines.map(wine => wine.grade));
+        const minGrade = Math.min.apply(Math, wines.map(wine => wine.grade));
+
+        const maxPrice = Math.max.apply(Math, wines.map(wine => wine.price));
+        const minPrice = Math.min.apply(Math, wines.map(wine => wine.price));
+
+        console.log(maxPrice, minPrice)
 
         this.setState({
             wines,
             countries,
-            vintage: [minYear, maxYear]
+            vintage: [minYear, maxYear],
+            grade: [minGrade, maxGrade],
+            price: [minPrice, maxPrice]
         })
     }
 
@@ -143,6 +153,18 @@ class DatavizPage extends Component {
                 [filter]: [1929, 2017],
                 currentFilter: ''
             })
+        } else if (filter === "grade") {
+            this.setState({
+                activeFilters,
+                [filter]: [80, 99],
+                currentFilter: ''
+            })
+        } else if (filter === "price") {
+            this.setState({
+                activeFilters,
+                [filter]: [4, 2500],
+                currentFilter: ''
+            })
         } else {
             this.setState({
                 activeFilters,
@@ -156,6 +178,12 @@ class DatavizPage extends Component {
         const activeFilters = this.state.activeFilters;
         if (filter === 'vintage') {
             activeFilters.vintage = (data[0] === 1929 && data[1] === 2017) ? false : true;
+        }
+        if (filter === 'grade') {
+            activeFilters.grade = (data[0] === 80 && data[1] === 99) ? false : true;
+        }
+        if (filter === 'price') {
+            activeFilters.price = (data[0] === 4 && data[1] === 2500) ? false : true;
         }
 
         this.setState({
@@ -222,6 +250,8 @@ class DatavizPage extends Component {
             activeFilters,
             taste,
             vintage,
+            grade,
+            price,
             step,
             currCountry
         } = this.state;
@@ -233,7 +263,7 @@ class DatavizPage extends Component {
                 <Tuto step={step} nextStep={this.nextStep} />
                 <div style={{
                     height: '100vh',
-                    width: '100vw',
+                    width: '100vw'
                 }}>
                     <Logo />
                     <SearchIcon toggleSearch={this.toggleSearch} />
@@ -263,6 +293,8 @@ class DatavizPage extends Component {
                         taste={taste}
                         updateFilterData={this.updateFilterData}
                         vintage={vintage}
+                        grade={grade}
+                        price={price}
                         />
                     <MapTest
                         wines={wines}
@@ -271,6 +303,8 @@ class DatavizPage extends Component {
                         currCountry={currCountry}
                         currentColors={currentColors}
                         vintage={vintage}
+                        grade={grade}
+                        price={price}
                     />
                 </div>
             </Fragment>
