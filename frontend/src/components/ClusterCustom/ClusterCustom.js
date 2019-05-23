@@ -3,7 +3,10 @@ import * as d3 from "d3";
 import { ClusterCustomStyled, NumberOfWines } from './ClusterCustomStyled';
 
 const ClusterCustom = ({name, changeCurrCountry = null, changeCenter = null, wineNumber = 0, data = [0, 0, 0]}) => {
-    const width = wineNumber / 15 > 60 ? wineNumber / 15 : 60;
+    let width = wineNumber / 15 > 60  ? wineNumber / 15 : 60;
+    if (width > 300) {
+        width = 300;
+    }
     let pie = d3.pie()(data);
     const isColored = !data[0] && !data[1] && !data[2] ? false : true;
 

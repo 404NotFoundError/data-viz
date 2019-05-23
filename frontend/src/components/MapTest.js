@@ -62,14 +62,37 @@ class MapTest extends React.PureComponent {
 			if (step === "continents") {
 				return (
 					<Fragment>
-						{ continents.map((continent, i) => (
-							<Marker
-							key={i}
-              coordinates={[continent.longitude, continent.latitude]}
-							>
-								<ClusterCustom name={continent.name} changeCenter={() => this.changeCenter(continent.longitude, continent.latitude, 3)}/>
-							</Marker>
-						))}
+						{ continents.map((continent, i) => {
+
+              const currContinentWines = wines.filter((wine, i) => (wine.continent === continent.name));
+              const redWines = currContinentWines.filter(wine => wine.color === "red");
+              const whiteWines = currContinentWines.filter(wine => wine.color === "white");
+              const pinkWines = currContinentWines.filter(wine => wine.color === "pink");
+
+              const wineNumber = currContinentWines.length;
+              
+              if (!wineNumber) return null;
+
+              const colorData = [
+                currentColors.red ? redWines.length : 0,
+                currentColors.white ? whiteWines.length : 0,
+                currentColors.white ? pinkWines.length : 0,
+              ];
+
+              return (
+                <Marker
+                key={i}
+                coordinates={[continent.longitude, continent.latitude]}
+                >
+                  <ClusterCustom
+                    name={continent.name}
+                    changeCenter={() => this.changeCenter(continent.longitude, continent.latitude, 3)}
+                    wineNumber={wineNumber}
+                    data={colorData}
+                  />
+                </Marker>
+              )              
+						})}
 					</Fragment>
 				)	
 			}
