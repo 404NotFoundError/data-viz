@@ -3,8 +3,14 @@ import ReactMapboxGl, { Layer, Feature, Marker } from 'react-mapbox-gl';
 import ClusterCustom from './ClusterCustom/ClusterCustom';
 import { Redirect } from 'react-router-dom';
 
+const bounds = [
+  [-180, -65], // Southwest coordinates
+  [180, 85]  // Northeast coordinates
+];
+
 const Map = ReactMapboxGl({
-  accessToken: "pk.eyJ1IjoiZ2FtYTk3ODAiLCJhIjoiY2p2NmR3NzA4MDA1NzQzbzdpd3IzNml3NiJ9.uqGMqqnpdiBlrnzWaxMKMg"
+  accessToken: "pk.eyJ1IjoiZ2FtYTk3ODAiLCJhIjoiY2p2NmR3NzA4MDA1NzQzbzdpd3IzNml3NiJ9.uqGMqqnpdiBlrnzWaxMKMg",
+  renderWorldCopies: false
 });
 
 class MapTest extends React.PureComponent {
@@ -271,13 +277,14 @@ class MapTest extends React.PureComponent {
         {this.renderRedirect()}
         {redirect === null && (
           <Map
-            // style="mapbox://styles/gama9780/cjv6bfst903be1fnolsx2eih4"
-            style='mapbox://styles/mapbox/dark-v10'
+            style="mapbox://styles/gama9780/cjv6bfst903be1fnolsx2eih4"
+            // style='mapbox://styles/mapbox/dark-v10'
             containerStyle={{ width: '100vw', height: '100vh', position: 'absolute', top: 0, left: 0, zIndex: 1 }}
             onZoom={this.setStep}
             zoom={zoom}
             center={center}
             onClick={(map, e) => console.log(e.lngLat)}
+            maxBounds={bounds}
           >
             {this.toRender()}
           </Map>

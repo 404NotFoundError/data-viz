@@ -263,7 +263,8 @@ class DatavizPage extends Component {
                 <Tuto step={step} nextStep={this.nextStep} />
                 <div style={{
                     height: '100vh',
-                    width: '100vw'
+                    width: '100vw',
+                    background: "#1A0E35"
                 }}>
                     <Logo />
                     <SearchIcon toggleSearch={this.toggleSearch} />
