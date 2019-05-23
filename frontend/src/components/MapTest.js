@@ -57,7 +57,10 @@ class MapTest extends React.PureComponent {
 
   toRender = () => {
     const { step } = this.state;
-    const { wines, countries, currCountry, changeCurrCountry, currentColors } = this.props;
+    const { countries, currCountry, changeCurrCountry, currentColors, vintage } = this.props;
+    const winesTemp = this.props.wines;
+
+    const wines = winesTemp.filter(wine => (wine.date <= vintage[1]) && wine.date >= vintage[0]);
 
 			if (step === "continents") {
 				return (
@@ -87,7 +90,7 @@ class MapTest extends React.PureComponent {
                   <ClusterCustom
                     name={continent.name}
                     changeCenter={() => this.changeCenter(continent.longitude, continent.latitude, 3)}
-                    wineNumber={wineNumber}
+                    wineNumber={colorData.reduce((a, b) => a + b) + currContinentWines.filter(wine => wine.color === "").length}
                     data={colorData}
                   />
                 </Marker>
@@ -226,7 +229,7 @@ class MapTest extends React.PureComponent {
                     name={countrie.name}
                     changeCurrCountry={changeCurrCountry}
                     changeCenter={() => this.changeCenter(countrie.longitude, countrie.latitude)}
-                    wineNumber={wineNumber}
+                    wineNumber={colorData.reduce((a, b) => a + b) + currCountryWines.filter(wine => wine.color === "").length}
                     data={colorData}
                   />
                 </Marker>

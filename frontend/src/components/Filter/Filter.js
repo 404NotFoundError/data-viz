@@ -38,7 +38,7 @@ const Filter = (
             currentFilter && (
                 <div className="filterComponent__container">
                     {currentFilter === "grade" && (<GradeFilter />)}
-                    {currentFilter === "vintage" && (<VintageFilter updateFilterData={updateFilterData} vintage={vintage} />)}
+                    {currentFilter === "vintage" && (<VintageFilter updateFilterData={updateFilterData} vintage={vintage} max={2017} min={1929} />)}
                     {currentFilter === "price" && (<PriceFilter />)}
                     {currentFilter === "taste" && (<TasteFilter updateTasteData={updateTasteData} stateTaste={taste} />)}
                 </div>

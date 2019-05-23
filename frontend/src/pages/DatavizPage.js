@@ -86,9 +86,13 @@ class DatavizPage extends Component {
         const countriesRes = await fetch(countriesURL);
         const { countries } = await countriesRes.json();
 
+        const maxYear = Math.max.apply(Math, wines.map(wine => wine.date ));
+        const minYear = Math.min.apply(Math, wines.map(wine => wine.date ));
+
         this.setState({
             wines,
-            countries
+            countries,
+            vintage: [minYear, maxYear]
         })
     }
 
@@ -136,7 +140,7 @@ class DatavizPage extends Component {
         } else if (filter === "vintage") {
             this.setState({
                 activeFilters,
-                [filter]: [1930, 2016],
+                [filter]: [1929, 2017],
                 currentFilter: ''
             })
         } else {
@@ -145,14 +149,13 @@ class DatavizPage extends Component {
                 [filter]: [],
                 currentFilter: ''
             })
-
         }
     }
 
     updateFilterData = (filter, data) => {
         const activeFilters = this.state.activeFilters;
         if (filter === 'vintage') {
-            activeFilters.vintage = (data[0] === 1930 && data[1] === 2016) ? false : true;
+            activeFilters.vintage = (data[0] === 1929 && data[1] === 2017) ? false : true;
         }
 
         this.setState({
@@ -267,6 +270,7 @@ class DatavizPage extends Component {
                         changeCurrCountry={this.changeCurrCountry}
                         currCountry={currCountry}
                         currentColors={currentColors}
+                        vintage={vintage}
                     />
                 </div>
             </Fragment>
