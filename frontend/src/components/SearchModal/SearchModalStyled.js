@@ -13,6 +13,9 @@ const SearchModalStyled = styled.div`
     background: white;
 
    .searchModal {
+       a{
+           text-decoration:none;
+       }
        position: relative;
        width: 100%;
        height: 100%;
@@ -91,6 +94,7 @@ const SearchModalStyled = styled.div`
             width: 100%;
             height: calc(100vh - 174px);
             margin: 32px 0px 29px 0px;
+            overflow-y:scroll;
         }
         &__moreDetailsBtn {
             font-family: 'Muli', sans-serif;
@@ -108,6 +112,39 @@ const SearchModalStyled = styled.div`
             margin-left: 50%;
             transform: translateX(-50%);
             cursor: pointer;
+            border:none;
+        }
+        &__alphabet
+        { 
+            position:sticky;
+            top:0px;
+            li{
+                margin:0.3rem;
+                a{
+                    color:#2E133C;
+                    font-family: Karla;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 20px;
+                    text-transform: uppercase;
+                    line-height:20px;
+                }
+            }
+            float:right;
+        }
+        &__resultContent
+        {   
+            max-width:90%;
+            padding:10px;
+            li{
+                font-family: Muli;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 13px;
+                margin-top:16px;
+                color:#2E133C;
+            }
         }
     }
 `;
