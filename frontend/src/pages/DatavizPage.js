@@ -267,6 +267,7 @@ class DatavizPage extends Component {
                     <SearchModal
                         isSearchOpen={isSearchOpen}
                         toggleSearch={this.toggleSearch}
+                        wines={wines}
                     />
                     {currCountry && (
                         <CountryIcon toggleCountryModal={this.toggleCountryModal} currCountry={currCountry} />
