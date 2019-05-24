@@ -186,7 +186,8 @@ class DatavizPage extends Component {
     }
 
     updateTasteData = data => {
-        let tastes = this.state.taste;
+        let tastes = [...this.state.taste];
+        
         if (tastes.includes(data)) {
             tastes = tastes.filter(taste => taste !== data);
         } else {
@@ -303,6 +304,7 @@ class DatavizPage extends Component {
                         vintage={vintage}
                         grade={grade}
                         price={price}
+                        taste={taste}
                     />
                 </div>
             </Fragment>

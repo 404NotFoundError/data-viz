@@ -70,14 +70,23 @@ class MapTest extends React.PureComponent {
       currentColors,
       vintage,
       grade,
-      price
+      price,
+      taste
     } = this.props;
     const winesTemp = this.props.wines;
+
+    console.log(taste);
 
     const wines = winesTemp
       .filter(wine => (wine.date <= vintage[1]) && wine.date >= vintage[0])
       .filter(wine => (wine.grade <= grade[1]) && wine.grade >= grade[0])
-      .filter(wine => (wine.price <= price[1]) && wine.price >= price[0]);
+      .filter(wine => (wine.price <= price[1]) && wine.price >= price[0])
+      .filter(wine => {
+        if (taste.length) {
+          return (taste.find(t => (t === wine.first_taste || t === wine.second_taste || t === wine.third_taste)))
+        }
+        return true;
+      });
 
 			if (step === "continents") {
 				return (
