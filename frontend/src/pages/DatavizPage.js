@@ -39,22 +39,15 @@ const countryIconStyle = {
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
-    marginLeft: 20
+    marginLeft: 20,
+    width: 18,
+    height: 18
 };
 
-const CountryIcon = ({toggleCountryModal}) => (
-    <svg onClick={() => toggleCountryModal(true)} style={countryIconStyle} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g clipPath="url(#clip0)">
-            <path d="M9 18C13.9706 18 18 13.9706 18 9C18 4.02944 13.9706 0 9 0C4.02944 0 0 4.02944 0 9C0 13.9706 4.02944 18 9 18Z" fill="#F0F0F0"/>
-            <path d="M18 9.00002C18 5.13034 15.5576 1.83145 12.1304 0.559814V17.4403C15.5576 16.1686 18 12.8697 18 9.00002Z" fill="#D80027"/>
-            <path d="M0 9.00002C0 12.8697 2.44241 16.1686 5.86958 17.4402V0.559814C2.44241 1.83145 0 5.13034 0 9.00002Z" fill="#0052B4"/>
-        </g>
-        <defs>
-            <clipPath id="clip0">
-                <rect width="18" height="18" fill="white"/>
-            </clipPath>
-        </defs>
-    </svg>    
+const CountryIcon = ({toggleCountryModal, currCountry}) => (
+    <div onClick={() => toggleCountryModal(true)} style={countryIconStyle}>
+        <img key={currCountry} style={{width: 18, height: 18}} src={require(`../static/images/countries/${currCountry.toLowerCase()}.png`)} alt="Country flag" className="countryFlag" />
+    </div>
 );
 
 class DatavizPage extends Component {
@@ -71,7 +64,7 @@ class DatavizPage extends Component {
         vintage: [1930, 2016],
         price: [4, 2500],
         taste: [],
-        step: 0,
+        step: localStorage.getItem('tuto') ? localStorage.getItem('tuto') : 0,
         currCountry: ""
     }
 
@@ -193,7 +186,8 @@ class DatavizPage extends Component {
     }
 
     updateTasteData = data => {
-        let tastes = this.state.taste;
+        let tastes = [...this.state.taste];
+        
         if (tastes.includes(data)) {
             tastes = tastes.filter(taste => taste !== data);
         } else {
@@ -226,6 +220,8 @@ class DatavizPage extends Component {
         if (step >= 3) {
             return;
         }
+
+        localStorage.setItem('tuto', step + 1);
 
         this.setState({
             step: this.state.step + 1
@@ -273,7 +269,9 @@ class DatavizPage extends Component {
                         toggleSearch={this.toggleSearch}
                         wines={wines}
                     />
-                    <CountryIcon toggleCountryModal={this.toggleCountryModal} />
+                    {currCountry && (
+                        <CountryIcon toggleCountryModal={this.toggleCountryModal} currCountry={currCountry} />
+                    )}
                     <CountryModal
                         isCountryOpen={isCountryOpen}
                         toggleCountryModal={this.toggleCountryModal}
@@ -297,7 +295,7 @@ class DatavizPage extends Component {
                         vintage={vintage}
                         grade={grade}
                         price={price}
-                        />
+                    />
                     <MapTest
                         wines={wines}
                         countries={countries}
@@ -307,6 +305,7 @@ class DatavizPage extends Component {
                         vintage={vintage}
                         grade={grade}
                         price={price}
+                        taste={taste}
                     />
                 </div>
             </Fragment>
