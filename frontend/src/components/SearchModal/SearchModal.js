@@ -10,9 +10,14 @@ class SearchModal extends Component {
         wines: [],
         inputValue: "",
         resultWine: [],
-        alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+        alphabet: [":","a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
         link: ""
     }
+
+    componentDidMount() {
+        this.wineContentInit();
+    }
+
     onInputChange = e => {
         this.setState({
             inputValue: e.target.value
@@ -64,11 +69,31 @@ class SearchModal extends Component {
         e.target.classList.remove("hovered");
     }
 
+    wineContentInit = () => {
+
+    }
+
     render() {
         const { toggleSearch, isSearchOpen, wines } = this.props;
 
         const alphabetList = this.state.alphabet.map(letter => {
             return (<li key={letter}><a href="#">{letter}</a></li>);
+        });
+        const alphabeticWines = this.props.wines.sort((a, b) => {
+            return a.name.localeCompare(b.name);
+        });
+        // console.log(alphabeticWines.slice(0, 50));
+        const initWineList = alphabeticWines.slice(0, 50).map(wine => {
+            return (
+                <li key={`${wine.id}${wine.name}`}
+                    onClick={e => this.onSingleWineClick(e)}
+                    value={wine.id}
+                    className="searchModal__wineContent"
+                    onMouseEnter={e => this.onSingleWineMouseEnter(e)}
+                    onMouseLeave={e => this.onSingleWineMouseLeave(e)}>
+                    {wine.name}
+                </li>
+            )
         });
         const wineList = this.state.resultWine.map(wine => {
             return (
@@ -102,7 +127,8 @@ class SearchModal extends Component {
                             {alphabetList}
                         </ul>
                         <ul className="searchModal__resultContent">
-                            {wineList}
+                            {/* {wineList} */}
+                            {this.state.inputValue.length !== 0 ? wineList : initWineList}
                         </ul>
                     </div>
                     <button className="searchModal__moreDetailsBtn">{this.state.link !== "" ? <Link to={`/single/${this.state.link}`}>More details</Link> : "More details"}</button>

@@ -119,7 +119,7 @@ const SearchModalStyled = styled.div`
             position:sticky;
             top:0px;
             li{
-                margin:0.3rem;
+                margin:0.25rem;
                 a{
                     color:#2E133C;
                     font-family: Karla;
