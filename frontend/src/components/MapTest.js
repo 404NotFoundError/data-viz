@@ -270,6 +270,8 @@ class MapTest extends React.PureComponent {
     const { zoom, center, redirect } = this.state;
     const { wines } = this.props;
 
+    console.log(wines);
+
     if (!wines.length) return <div>Loading...</div>
 
     return (
