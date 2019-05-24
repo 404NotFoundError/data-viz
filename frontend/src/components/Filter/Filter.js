@@ -18,7 +18,9 @@ const Filter = (
         updateTasteData,
         taste,
         updateFilterData,
-        vintage
+        vintage,
+        grade,
+        price
     }) => (
     <FilterStyled>
         <div className="filtersContainer">
@@ -37,9 +39,9 @@ const Filter = (
         {
             currentFilter && (
                 <div className="filterComponent__container">
-                    {currentFilter === "grade" && (<GradeFilter />)}
-                    {currentFilter === "vintage" && (<VintageFilter updateFilterData={updateFilterData} vintage={vintage} />)}
-                    {currentFilter === "price" && (<PriceFilter />)}
+                    {currentFilter === "grade" && (<GradeFilter updateFilterData={updateFilterData} grade={grade} max={99} min={80} />)}
+                    {currentFilter === "vintage" && (<VintageFilter updateFilterData={updateFilterData} vintage={vintage} max={2017} min={1929} />)}
+                    {currentFilter === "price" && (<PriceFilter  updateFilterData={updateFilterData} price={price} max={2500} min={4} />)}
                     {currentFilter === "taste" && (<TasteFilter updateTasteData={updateTasteData} stateTaste={taste} />)}
                 </div>
             )

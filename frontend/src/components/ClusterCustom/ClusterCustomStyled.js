@@ -10,7 +10,7 @@ export const ClusterCustomStyled = styled.div`
 
     &:hover {
         .pieChart {
-            background: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.2);
         }
     }
 
@@ -21,7 +21,7 @@ export const ClusterCustomStyled = styled.div`
         transform: translateX(-50%) translateY(-50%);
         border-radius: 50%;
 
-        transition: 0.2s ease-in-out;
+        transition: background-color 0.2s ease-in-out;
 
         border: ${props => props.isColored ? "none" : "1px solid white"};
     }

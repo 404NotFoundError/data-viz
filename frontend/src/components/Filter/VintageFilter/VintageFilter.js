@@ -5,14 +5,14 @@ import 'rc-slider/assets/index.css';
 
 const style = { width: 8, height: 400, margin: '10px 0px', transform: 'translateX(-1px)' };
 
-const VintageFilter = ({updateFilterData, vintage}) => (
+const VintageFilter = ({updateFilterData, vintage, max = 1929, min = 2017}) => (
     <VintageFilterStyled>
         <p className="marks">{vintage[1]}</p>
         <Range
             style={style}
             vertical={true}
-            min={1930}
-            max={2016}
+            min={min}
+            max={max}
             step={1}
             onChange={value => updateFilterData('vintage', value)}
             defaultValue={vintage}
