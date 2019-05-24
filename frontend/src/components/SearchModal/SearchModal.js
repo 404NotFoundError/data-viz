@@ -3,7 +3,6 @@ import SearchModalStyled from './SearchModalStyled';
 import { Fog } from '../../helpers/const';
 import { Link } from 'react-router-dom';
 
-const countriesURL = "https://wine.frb.io/api/wines";
 
 class SearchModal extends Component {
 
@@ -14,65 +13,66 @@ class SearchModal extends Component {
         alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
         link: ""
     }
-
-    onSearchClickResult = async () => {
-        const result = await fetch(countriesURL);
-        const { wines } = await result.json();
-        console.log(wines)
-        this.setState({
-            wines
-        });
-        this.returnSearchResult();
-    }
-    onSearchClick = () => {
-        // console.log(`${countriesURL}/${this.state.inputValue}`);
-        this.onSearchClickResult();
-    }
     onInputChange = e => {
         this.setState({
             inputValue: e.target.value
         });
     }
+    onSearchClick = () => {
+        this.userInputValidation();
+    }
+    userInputValidation = () => {
+
+        const userValue = this.state.inputValue;
+        if (userValue.length >= 5 && /^[a-zA-Z\s]+$/.test(this.state.inputValue)) {
+            this.returnSearchResult();
+        }
+        else {
+            const resultWine = [{ id: null }, { name: "Your research is not valid" }];
+            this.setState({
+                resultWine
+            });
+        }
+    }
     returnSearchResult = () => {
-        const resultWine = this.state.wines.filter(el => {
+        let resultWine = this.props.wines.filter(el => {
             if (el.name.toUpperCase().indexOf(this.state.inputValue.toUpperCase()) >= 0) {
                 return el;
             }
-            // else {
-            //     return el = [{ id: 1 }, { name: "Your search failed" }];
-            // }
         });
+        if (resultWine.length === 0) {
+            resultWine = [{ id: null }, { name: "Your research has not result " }];
+        }
         this.setState({
             resultWine
         });
     }
 
     onSingleWineClick = e => {
-        console.log(e.target.value);
         let link = e.target.value;
-        this.setState({
-            link
-        });
+        if (link !== 0) {
+            this.setState({
+                link
+            });
+        }
     }
 
     onSingleWineMouseEnter = e => {
         e.target.classList.add("hovered");
-        console.log(e.target.classList);
     }
     onSingleWineMouseLeave = e => {
         e.target.classList.remove("hovered");
-        console.log(e.target.classList);
     }
 
     render() {
-        const { toggleSearch, isSearchOpen } = this.props;
+        const { toggleSearch, isSearchOpen, wines } = this.props;
 
         const alphabetList = this.state.alphabet.map(letter => {
             return (<li key={letter}><a href="#">{letter}</a></li>);
         });
         const wineList = this.state.resultWine.map(wine => {
             return (
-                <li key={wine.id}
+                <li key={`${wine.id}${wine.name}`}
                     onClick={e => this.onSingleWineClick(e)}
                     value={wine.id}
                     className="searchModal__wineContent"

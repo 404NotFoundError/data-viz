@@ -146,6 +146,16 @@ const SearchModalStyled = styled.div`
                 color:#2E133C;
             }
         }
+        &__wineContent
+        {
+            opacity: 0.4;
+           transition: .2s ease-in-out;
+        }
+    }
+    .hovered
+    {
+        opacity: 1;
+        transition: .2s ease-in-out;
     }
 `;
 
