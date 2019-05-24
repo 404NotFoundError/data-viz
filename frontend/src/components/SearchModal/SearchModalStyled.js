@@ -119,17 +119,15 @@ const SearchModalStyled = styled.div`
             position:sticky;
             top:0px;
             li{
-                margin:0.3rem;
-                a{
-                    color:#2E133C;
-                    font-family: Karla;
-                    font-style: normal;
-                    font-weight: bold;
-                    font-size: 14px;
-                    line-height: 20px;
-                    text-transform: uppercase;
-                    line-height:20px;
-                }
+                margin:0.25rem;
+                color:#2E133C;
+                font-family: Karla;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 20px;
+                text-transform: uppercase;
+                line-height:20px;
             }
             float:right;
         }
