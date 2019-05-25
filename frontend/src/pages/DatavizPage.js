@@ -88,8 +88,6 @@ class DatavizPage extends Component {
         const maxPrice = Math.max.apply(Math, wines.map(wine => wine.price));
         const minPrice = Math.min.apply(Math, wines.map(wine => wine.price));
 
-        console.log(maxPrice, minPrice)
-
         this.setState({
             wines,
             countries,
