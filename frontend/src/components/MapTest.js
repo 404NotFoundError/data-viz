@@ -35,7 +35,7 @@ class MapTest extends React.PureComponent {
 
   setStep = e => {
     let step;
-    if (e.getZoom() < 3) {
+    if (e.getZoom() < 3.9) {
       step = "continents";
       this.props.changeCurrCountry("");
     }
@@ -48,7 +48,7 @@ class MapTest extends React.PureComponent {
     })
   }
 
-  changeCenter = (lng, lat, zoom = 5) => {
+  changeCenter = (lng, lat, zoom = 4) => {
     this.setState({
       zoom: [zoom],
       center: [lng, lat]
@@ -56,7 +56,6 @@ class MapTest extends React.PureComponent {
   }
 
   mouseOverWine = e => {
-    console.log(e);
     e.feature.layer.paint["circle-radius"] = 10;
     document.body.style.cursor = "pointer";
   }
@@ -74,8 +73,6 @@ class MapTest extends React.PureComponent {
       taste
     } = this.props;
     const winesTemp = this.props.wines;
-
-    console.log(taste);
 
     const wines = winesTemp
       .filter(wine => (wine.date <= vintage[1]) && wine.date >= vintage[0])
@@ -115,7 +112,7 @@ class MapTest extends React.PureComponent {
                 >
                   <ClusterCustom
                     name={continent.name}
-                    changeCenter={() => this.changeCenter(continent.longitude, continent.latitude, 3)}
+                    changeCenter={() => this.changeCenter(continent.longitude, continent.latitude, 3.9)}
                     wineNumber={colorData.reduce((a, b) => a + b) + currContinentWines.filter(wine => wine.color === "").length}
                     data={colorData}
                   />
@@ -134,7 +131,7 @@ class MapTest extends React.PureComponent {
                 const redWines = currCountryWines.filter(wine => wine.color === "red");
                 const whiteWines = currCountryWines.filter(wine => wine.color === "white");
                 const pinkWines = currCountryWines.filter(wine => wine.color === "pink");
-                const elseWines = currCountryWines.filter(wine => wine.color === "");
+                // const elseWines = currCountryWines.filter(wine => wine.color === "");
 
                 return (
                   <Fragment key={`fragment__${i}`}>
@@ -205,7 +202,7 @@ class MapTest extends React.PureComponent {
                       }
                     </Layer>
                   )}
-                  {currentColors.pink && (
+                  {/* {currentColors.pink && (
                     <Layer
                       key={`elseLayer__${i}`}
                       type="circle"
@@ -226,7 +223,7 @@ class MapTest extends React.PureComponent {
                         ))
                       }
                     </Layer>
-                  )}
+                  )} */}
                   </Fragment>
                 ); 
               }
@@ -264,22 +261,11 @@ class MapTest extends React.PureComponent {
 					</Fragment>
 				)
       }
-      // return (
-      //   <Layer
-      //     type="heatmap"
-      //   >
-      //     { wines.map((wine, i) => (
-      //         <Feature key={`feature__${i}`} coordinates={[wine.longitude, wine.latitude]}/>
-      //     ))}
-      //   </Layer>
-      // )
     }
 
   render() {
     const { zoom, center, redirect } = this.state;
     const { wines } = this.props;
-
-    console.log(wines);
 
     if (!wines.length) return <div>Loading...</div>
 
@@ -294,7 +280,7 @@ class MapTest extends React.PureComponent {
             onZoom={this.setStep}
             zoom={zoom}
             center={center}
-            onClick={(map, e) => console.log(e.lngLat)}
+            onClick={(map, e) => console.log(e)}
             maxBounds={bounds}
           >
             {this.toRender()}
@@ -316,7 +302,7 @@ const continents = [
 	{
 		latitude: -31.065922730080157,
 		longitude: 152.78101519406331,
-		name: "Oceania"
+		name: "Australia"
 	},
 	{
 		latitude: 56.51520886670177,
