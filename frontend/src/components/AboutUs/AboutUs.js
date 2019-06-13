@@ -23,7 +23,7 @@ const AboutUs = ({isActive, toggleModal}) => (
             <h4 className="AboutUs__subtitle">Educational project <a className="AboutUs__link" href="https://www.hetic.net/"><span className="AboutUs__bold">HÉTIC P2020</span></a></h4>
             <div className="AboutUs__trait" />
             <p className="AboutUs__names">
-                <a className="AboutUs__link" target="_blank" href="https://dribbble.com/claralangen">José <span className="AboutUs__bold">Guignery Teixeira</span></a> | {' '}
+                <a className="AboutUs__link" target="_blank" href="https://www.linkedin.com/in/joetxa">José <span className="AboutUs__bold">Guignery Teixeira</span></a> | {' '}
                 <a className="AboutUs__link" target="_blank" href="https://dribbble.com/claralangen">Clara <span className="AboutUs__bold">de Langenhagen</span></a> <br /> 
                 <a className="AboutUs__link" target="_blank" href="https://dribbble.com/claralangen">Adebayo <span className="AboutUs__bold">Hountondji</span></a> | {' '}
                 <a className="AboutUs__link" target="_blank" href="https://dribbble.com/claralangen">Maël <span className="AboutUs__bold">Allano</span></a> | {' '}

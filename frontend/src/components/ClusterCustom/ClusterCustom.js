@@ -19,7 +19,7 @@ const ClusterCustom = ({name, changeCurrCountry = null, changeCenter = null, win
                 changeCenter();
             }
         }}>
-            <NumberOfWines>{wineNumber ? wineNumber : name}</NumberOfWines>
+            <NumberOfWines>{wineNumber ? wineNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") : 0}</NumberOfWines>
             <svg className="pieChart" height={width} width={width}>
                 <g transform={`translate(${width / 2},${width / 2})`}>
                     <Slice pie={pie} width={width}/>

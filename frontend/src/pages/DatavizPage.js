@@ -24,9 +24,9 @@ const searchIconStyle = {
     marginLeft: 20
 };
 
-const SearchIcon = ({toggleSearch}) => (
+const SearchIcon = ({ toggleSearch }) => (
     <svg onClick={() => toggleSearch(true)} style={searchIconStyle} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fillRule="evenodd" clipRule="evenodd" d="M15.0372 13.5373C15.8046 12.4691 16.255 11.1617 16.255 9.755C16.255 6.165 13.345 3.255 9.755 3.255C6.165 3.255 3.255 6.165 3.255 9.755C3.255 13.345 6.165 16.255 9.755 16.255C11.1617 16.255 12.4691 15.8046 13.5373 15.0372L19.255 20.745L20.745 19.255L15.0372 13.5373ZM5.255 9.755C5.255 12.245 7.26501 14.255 9.755 14.255C12.245 14.255 14.255 12.245 14.255 9.755C14.255 7.26501 12.245 5.255 9.755 5.255C7.26501 5.255 5.255 7.26501 5.255 9.755Z" fill="white"/>
+        <path fillRule="evenodd" clipRule="evenodd" d="M15.0372 13.5373C15.8046 12.4691 16.255 11.1617 16.255 9.755C16.255 6.165 13.345 3.255 9.755 3.255C6.165 3.255 3.255 6.165 3.255 9.755C3.255 13.345 6.165 16.255 9.755 16.255C11.1617 16.255 12.4691 15.8046 13.5373 15.0372L19.255 20.745L20.745 19.255L15.0372 13.5373ZM5.255 9.755C5.255 12.245 7.26501 14.255 9.755 14.255C12.245 14.255 14.255 12.245 14.255 9.755C14.255 7.26501 12.245 5.255 9.755 5.255C7.26501 5.255 5.255 7.26501 5.255 9.755Z" fill="white" />
     </svg>
 );
 
@@ -44,9 +44,9 @@ const countryIconStyle = {
     height: 18
 };
 
-const CountryIcon = ({toggleCountryModal, currCountry}) => (
+const CountryIcon = ({ toggleCountryModal, currCountry }) => (
     <div onClick={() => toggleCountryModal(true)} style={countryIconStyle}>
-        <img key={currCountry} style={{width: 18, height: 18}} src={require(`../static/images/countries/${currCountry.toLowerCase()}.png`)} alt="Country flag" className="countryFlag" />
+        <img key={currCountry} style={{ width: 18, height: 18 }} src={require(`../static/images/countries/${currCountry.toLowerCase()}.png`)} alt="Country flag" className="countryFlag" />
     </div>
 );
 
@@ -57,9 +57,9 @@ class DatavizPage extends Component {
         isSearchOpen: false,
         isCountryOpen: false,
         currentFilter: '',
-        currentColors: {red: true, pink: true, white: true},
+        currentColors: { red: true, pink: true, white: true },
         titleDisplayed: 'World',
-        activeFilters: {grade: false, vintage: false, price: false, taste: false, colors: true},
+        activeFilters: { grade: false, vintage: false, price: false, taste: false, colors: true },
         grade: [80, 99],
         vintage: [1930, 2016],
         price: [4, 2500],
@@ -135,7 +135,7 @@ class DatavizPage extends Component {
         if (filter === "colors") {
             this.setState({
                 activeFilters,
-                currentColors: {red: false, pink: false, white: false},
+                currentColors: { red: false, pink: false, white: false },
                 currentFilter: ''
             })
         } else if (filter === "vintage") {
@@ -185,7 +185,7 @@ class DatavizPage extends Component {
 
     updateTasteData = data => {
         let tastes = [...this.state.taste];
-        
+
         if (tastes.includes(data)) {
             tastes = tastes.filter(taste => taste !== data);
         } else {
@@ -232,6 +232,7 @@ class DatavizPage extends Component {
         })
     }
 
+
     render() {
         const {
             wines,
@@ -273,6 +274,8 @@ class DatavizPage extends Component {
                     <CountryModal
                         isCountryOpen={isCountryOpen}
                         toggleCountryModal={this.toggleCountryModal}
+                        countries={countries}
+                        currCountry={currCountry}
                     />
                     <FilterTitle
                         titleDisplayed={titleDisplayed}
