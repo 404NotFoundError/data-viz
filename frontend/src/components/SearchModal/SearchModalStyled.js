@@ -162,12 +162,14 @@ const SearchModalStyled = styled.div`
         {
             opacity: 0.4;
            transition: .2s ease-in-out;
+           cursor:pointer;
         }
     }
     .hovered
     {
         opacity: 1;
         transition: .2s ease-in-out;
+        font-weight:bold !important;
     }
 `;
 
