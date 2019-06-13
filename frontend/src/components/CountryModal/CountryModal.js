@@ -77,7 +77,6 @@ class CountryModal extends Component {
 
         const bestWine = this.state.wineLoaded && this.state.wineResult[currCountry] !== undefined ?
             this.state.wineResult[currCountry].map((el, i) => {
-                console.log(el)
                 el.color === "red" ? color = "#D71140" : el.color === "white" ? color = "rgb(255, 232, 181)" : color = "#EE98AC";
 
                 return <li key={i} className="wineList">

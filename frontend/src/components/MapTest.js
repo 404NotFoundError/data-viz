@@ -57,10 +57,10 @@ class MapTest extends React.PureComponent {
     })
   }
 
-  mouseOverWine = e => {
-    e.feature.layer.paint["circle-radius"] = 10;
-    document.body.style.cursor = "pointer";
-  }
+  // mouseOverWine = e => {
+  //   e.feature.layer.paint["circle-radius"] = 10;
+  //   document.body.style.cursor = "pointer";
+  // }
 
   toRender = () => {
     const { step } = this.state;
@@ -72,7 +72,8 @@ class MapTest extends React.PureComponent {
       vintage,
       grade,
       price,
-      taste
+      taste,
+      toggleToolTip
     } = this.props;
     const winesTemp = this.props.wines;
 
@@ -158,7 +159,10 @@ class MapTest extends React.PureComponent {
                             key={`redWine__${index}`}
                             coordinates={[wine.longitude, wine.latitude]}
                             onClick={() => this.setRedirect(wine.id)}
-                            onMouseEnter={e => this.mouseOverWine(e)}
+                            // onClick={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price, wine.id)}
+                            // onMouseEnter={e => this.mouseOverWine(e)}
+                            // onMouseEnter={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price)}
+                            // onMouseLeave={() => toggleToolTip(false)}
                           />
                         ))
                       }
@@ -180,7 +184,10 @@ class MapTest extends React.PureComponent {
                           <Feature
                             key={`whiteWine__${index}`}
                             coordinates={[wine.longitude, wine.latitude]}
+                            // onClick={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price, wine.id)}
                             onClick={() => this.setRedirect(wine.id)}
+                            // onMouseEnter={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price)}
+                            // onMouseLeave={() => toggleToolTip(false)}
                           />
                         ))
                       }
@@ -202,7 +209,10 @@ class MapTest extends React.PureComponent {
                           <Feature
                             key={`pinkWine__${index}`}
                             coordinates={[wine.longitude, wine.latitude]}
+                            // onClick={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price, wine.id)}
                             onClick={() => this.setRedirect(wine.id)}
+                            // onMouseEnter={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price)}
+                            // onMouseLeave={() => toggleToolTip(false)}
                           />
                         ))
                       }
