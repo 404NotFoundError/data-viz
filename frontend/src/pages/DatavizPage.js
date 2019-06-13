@@ -6,7 +6,7 @@ import SearchModal from "../components/SearchModal/SearchModal";
 import CountryModal from "../components/CountryModal/CountryModal";
 import Tuto from "../components/Tuto/Tuto";
 import MapTest from "../components/MapTest";
-// import wines from "../helpers/mockups/data.js"
+import wines from "../helpers/mockups/data.js"
 
 const countriesURL = "https://wine.frb.io/api/countries";
 const winesURL = "https://wine.frb.io/api/wines";
@@ -73,8 +73,8 @@ class DatavizPage extends Component {
     }
 
     init = async () => {
-        const winesRes = await fetch(winesURL);
-        const { wines } = await winesRes.json();
+        // const winesRes = await fetch(winesURL);
+        // const { wines } = await winesRes.json();
 
         const countriesRes = await fetch(countriesURL);
         const { countries } = await countriesRes.json();
