@@ -34,7 +34,7 @@ export const CountryModalStyled = styled.div`
         font-weight:bold;
     }
     .container{
-        height:33vh;
+        height:30vh;
         font-family: 'Muli', sans-serif;
         font-style: normal;
         & li{
