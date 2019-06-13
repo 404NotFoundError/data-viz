@@ -167,9 +167,9 @@ class SearchModal extends Component {
                     <p onClick={this.displayMoreWines}>Display more wine</p>
                 </div>
                 {this.state.link !== "" && (<button className="searchModal__moreDetailsBtn"><Link to={`/single/${this.state.link}`}>More details</Link></button>)}
-        </SearchModalStyled>
-    );
-}
+            </SearchModalStyled>
+        );
+    }
 };
 
 export default SearchModal;
