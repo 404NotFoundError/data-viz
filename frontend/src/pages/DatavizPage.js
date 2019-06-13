@@ -57,13 +57,13 @@ class DatavizPage extends Component {
         isSearchOpen: false,
         isCountryOpen: false,
         currentFilter: '',
-        currentColors: { red: true, pink: true, white: true },
+        currentColors: localStorage.getItem('currentColors') ? JSON.parse(localStorage.getItem('currentColors')) : { red: true, pink: true, white: true },
         titleDisplayed: 'World',
         activeFilters: localStorage.getItem('activeFilters') ? JSON.parse(localStorage.getItem('activeFilters')) : { grade: false, vintage: false, price: false, taste: false, colors: true },
         grade: [80, 99],
         vintage: [1992, 2016],
         price: [4, 2500],
-        taste: [],
+        taste: localStorage.getItem('taste') ? JSON.parse(localStorage.getItem('taste')) : [],
         step: localStorage.getItem('tuto') ? localStorage.getItem('tuto') : 0,
         currCountry: ""
     }
@@ -113,8 +113,12 @@ class DatavizPage extends Component {
         const currentColors = Object.assign({}, this.state.currentColors);
         currentColors[color] = !this.state.currentColors[color];
 
+        localStorage.setItem("currentColors", JSON.stringify(currentColors));
+
         const activeFilters = this.state.activeFilters;
         activeFilters.colors = (!currentColors.red && !currentColors.pink && !currentColors.white) ? false : true;
+
+        localStorage.setItem("activeFilters", JSON.stringify(activeFilters));
 
         this.setState({
             currentColors,
@@ -135,6 +139,7 @@ class DatavizPage extends Component {
         localStorage.setItem('activeFilters', JSON.stringify(activeFilters));
 
         if (filter === "colors") {
+            localStorage.setItem("currentColors", JSON.stringify({ red: false, pink: false, white: false }));
             this.setState({
                 activeFilters,
                 currentColors: { red: false, pink: false, white: false },
@@ -162,6 +167,7 @@ class DatavizPage extends Component {
                 currentFilter: ''
             })
         } else {
+            localStorage.setItem('taste', JSON.stringify([]));
             this.setState({
                 activeFilters,
                 [filter]: [],
@@ -204,6 +210,9 @@ class DatavizPage extends Component {
 
         const activeFilters = this.state.activeFilters;
         activeFilters.taste = tastes.length ? true : false;
+
+        localStorage.setItem('taste', JSON.stringify(tastes));
+        localStorage.setItem('activeFilters', JSON.stringify(activeFilters));
 
         this.setState({
             activeFilters,
