@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@amcharts/amcharts4": "^4.4.10",
+    "@amcharts/amcharts4-geodata": "^4.1.6",
     "@inlet/react-pixi": "^0.5.7",
     "@turf/random": "^6.0.2",
     "@urbica/react-map-gl": "^1.6.0",

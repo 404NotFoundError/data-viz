@@ -105,6 +105,10 @@ class MapTest extends React.PureComponent {
                 currentColors.pink ? pinkWines.length : 0,
               ];
 
+              if (!colorData[0] && !colorData[1] && !colorData[2]) {
+                return null;
+              }
+
               return (
                 <Marker
                 key={i}
@@ -202,28 +206,6 @@ class MapTest extends React.PureComponent {
                       }
                     </Layer>
                   )}
-                  {/* {currentColors.pink && (
-                    <Layer
-                      key={`elseLayer__${i}`}
-                      type="circle"
-                      paint={
-                        {
-                          "circle-color": "#EE98AC",
-                          "circle-radius": 3
-                        }
-                      }
-                    >
-                      {
-                        elseWines.map((wine, index) => (
-                          <Feature
-                            key={`elsekWine__${index}`}
-                            coordinates={[wine.longitude, wine.latitude]}
-                            onClick={() => this.setRedirect(wine.id)}
-                          />
-                        ))
-                      }
-                    </Layer>
-                  )} */}
                   </Fragment>
                 ); 
               }
@@ -242,6 +224,10 @@ class MapTest extends React.PureComponent {
                 currentColors.white ? whiteWines.length : 0,
                 currentColors.pink ? pinkWines.length : 0,
               ];
+
+              if (!colorData[0] && !colorData[1] && !colorData[2]) {
+                return null;
+              }
 
               return (
                 <Marker

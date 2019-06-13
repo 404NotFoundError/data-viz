@@ -7,26 +7,22 @@ class CountryModal extends Component {
         averageResult: [],
         wineResult: {},
         wineLoaded: false,
-        variety: {}
+        variety: {},
+        varietyLoaded: false,
     }
     componentWillMount() {
         this.handleAverage();
         this.handleBestWine();
-        // this.test();
+        this.handleVariety();
     }
 
-    componentWillUpdate() {
-        console.log(this.props.isCountryOpen)
-        // this.props.isCountryOpen ? this.test() : null;
-        if (!this.props.isCountryOpen) {
-        }
-    }
 
-    test = async () => {
-        const testurl = await fetch('https://wine.frb.io/api/varieties');
-        const testResult = await testurl.json();
+    handleVariety = async () => {
+        const varietyUrl = await fetch('https://wine.frb.io/api/varieties');
+        const varietyResult = await varietyUrl.json();
         this.setState({
-            variety: testResult.results
+            variety: varietyResult.results,
+            varietyLoaded: true
         });
     }
 
@@ -64,6 +60,7 @@ class CountryModal extends Component {
                 );
             }
         }
+
         return result;
     }
 
@@ -93,6 +90,11 @@ class CountryModal extends Component {
                 </li>;
             })
             : null;
+        const variety = this.state.variety[currCountry] === undefined ?
+            null :
+            this.state.variety[currCountry].map((el, i) => {
+                return <li key={i}><p>{el.variety} : {el.count} wines in this variety</p></li>
+            });
 
 
         return (
@@ -112,6 +114,7 @@ class CountryModal extends Component {
                     </div>
                     <div className="varietyContainer container">
                         <Title>Distribution of grape variety</Title>
+                        {variety}
                     </div>
                 </div>
             </CountryModalStyled>

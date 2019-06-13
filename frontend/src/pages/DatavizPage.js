@@ -59,7 +59,7 @@ class DatavizPage extends Component {
         currentFilter: '',
         currentColors: { red: true, pink: true, white: true },
         titleDisplayed: 'World',
-        activeFilters: { grade: false, vintage: false, price: false, taste: false, colors: true },
+        activeFilters: localStorage.getItem('activeFilters') ? JSON.parse(localStorage.getItem('activeFilters')) : { grade: false, vintage: false, price: false, taste: false, colors: true },
         grade: [80, 99],
         vintage: [1992, 2016],
         price: [4, 2500],
@@ -79,14 +79,14 @@ class DatavizPage extends Component {
         const countriesRes = await fetch(countriesURL);
         const { countries } = await countriesRes.json();
 
-        const maxYear = Math.max.apply(Math, wines.map(wine => wine.date));
-        const minYear = Math.min.apply(Math, wines.map(wine => wine.date));
+        const maxYear = localStorage.getItem("year") ? JSON.parse(localStorage.getItem("year"))[1] : Math.max.apply(Math, wines.map(wine => wine.date));
+        const minYear = localStorage.getItem("year") ? JSON.parse(localStorage.getItem("year"))[0] : Math.min.apply(Math, wines.map(wine => wine.date));
 
-        const maxGrade = Math.max.apply(Math, wines.map(wine => wine.grade));
-        const minGrade = Math.min.apply(Math, wines.map(wine => wine.grade));
+        const maxGrade = localStorage.getItem("grade") ? JSON.parse(localStorage.getItem("grade"))[1] : Math.max.apply(Math, wines.map(wine => wine.grade));
+        const minGrade = localStorage.getItem("grade") ? JSON.parse(localStorage.getItem("grade"))[0] : Math.min.apply(Math, wines.map(wine => wine.grade));
 
-        const maxPrice = Math.max.apply(Math, wines.map(wine => wine.price));
-        const minPrice = Math.min.apply(Math, wines.map(wine => wine.price));
+        const maxPrice = localStorage.getItem("price") ? JSON.parse(localStorage.getItem("price"))[1] : Math.max.apply(Math, wines.map(wine => wine.price));
+        const minPrice = localStorage.getItem("price") ? JSON.parse(localStorage.getItem("price"))[0] : Math.min.apply(Math, wines.map(wine => wine.price));
 
         this.setState({
             wines,
@@ -132,6 +132,8 @@ class DatavizPage extends Component {
         const activeFilters = this.state.activeFilters;
         activeFilters[filter] = false;
 
+        localStorage.setItem('activeFilters', JSON.stringify(activeFilters));
+
         if (filter === "colors") {
             this.setState({
                 activeFilters,
@@ -139,18 +141,21 @@ class DatavizPage extends Component {
                 currentFilter: ''
             })
         } else if (filter === "vintage") {
+            localStorage.setItem('year', JSON.stringify([1992, 2017]));
             this.setState({
                 activeFilters,
                 [filter]: [1992, 2017],
                 currentFilter: ''
             })
         } else if (filter === "grade") {
+            localStorage.setItem('grade', JSON.stringify([80, 99]));
             this.setState({
                 activeFilters,
                 [filter]: [80, 99],
                 currentFilter: ''
             })
         } else if (filter === "price") {
+            localStorage.setItem('price', JSON.stringify([4, 2500]));
             this.setState({
                 activeFilters,
                 [filter]: [4, 2500],
@@ -169,13 +174,18 @@ class DatavizPage extends Component {
         const activeFilters = this.state.activeFilters;
         if (filter === 'vintage') {
             activeFilters.vintage = (data[0] === 1992 && data[1] === 2017) ? false : true;
+            localStorage.setItem("year", JSON.stringify(data));
         }
         if (filter === 'grade') {
             activeFilters.grade = (data[0] === 80 && data[1] === 99) ? false : true;
+            localStorage.setItem("grade", JSON.stringify(data));
         }
         if (filter === 'price') {
             activeFilters.price = (data[0] === 4 && data[1] === 2500) ? false : true;
+            localStorage.setItem("price", JSON.stringify(data));
         }
+
+        localStorage.setItem("activeFilters", JSON.stringify(activeFilters));
 
         this.setState({
             activeFilters,
@@ -231,7 +241,6 @@ class DatavizPage extends Component {
             currCountry: country
         })
     }
-
 
     render() {
         const {
