@@ -270,7 +270,7 @@ class MapTest extends React.PureComponent {
             onZoom={this.setStep}
             zoom={zoom}
             center={center}
-            onClick={(map, e) => console.log(e)}
+            // onClick={(map, e) => console.log(e)}
             maxBounds={bounds}
           >
             {this.toRender()}

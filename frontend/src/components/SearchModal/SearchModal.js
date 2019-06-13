@@ -9,7 +9,7 @@ class SearchModal extends Component {
         wines: [],
         inputValue: "",
         resultWine: [],
-        alphabet: [":", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+        alphabet: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
         link: 0,
         maxWineDisplayed: 500,
         letterSelected: false,
@@ -94,7 +94,7 @@ class SearchModal extends Component {
             resultWine,
             letterSelected
         }, () => {
-            console.log(this.state.letterSelected)
+            // console.log(this.state.letterSelected)
         });
     }
 
@@ -121,9 +121,20 @@ class SearchModal extends Component {
         //return in an alphabetic order the list of wine from the database
         const alphabeticWines = this.props.wines.sort((a, b) => {
             return a.name.localeCompare(b.name);
+            // if (!a.designation && b.designation) {
+            //     return a.variety.localeCompare(b.designation);
+            // }
+            // if (a.designation && !b.designation) {
+            //     return a.designation.localeCompare(b.variety);
+            // }
+            // if (!a.designation && !b.designation) {
+            //     return a.variety.localeCompare(b.variety);
+            // }
+            // return a.designation.localeCompare(b.designation);
         });
         //display a range of wine
         const initWineList = alphabeticWines.slice(0, this.state.maxWineDisplayed).map(wine => {
+            if (wine.name[0] === ":") return null;
             return (
                 <li key={`${wine.id}${wine.name}`}
                     style={{ position: "relative" }}
@@ -132,11 +143,13 @@ class SearchModal extends Component {
                     className="searchModal__wineContent"
                     onMouseEnter={e => this.onSingleWineMouseEnter(e)}
                     onMouseLeave={e => this.onSingleWineMouseLeave(e)}>
+                    {/* {`${wine.designation} ${wine.variety} ${wine.date}`} */}
                     {wine.name}
                 </li>
             )
         });
         const wineList = this.state.resultWine.slice(0, this.state.maxWineDisplayed).map(wine => {
+            if (wine.name[0] === ":") return null;
             return (
                 <li key={`${wine.id}${wine.name}`}
                     style={{ position: "relative" }}
@@ -145,6 +158,7 @@ class SearchModal extends Component {
                     className="searchModal__wineContent"
                     onMouseEnter={e => this.onSingleWineMouseEnter(e)}
                     onMouseLeave={e => this.onSingleWineMouseLeave(e)}>
+                    {/* {`${wine.designation} ${wine.variety} ${wine.date}`} */}
                     {wine.name}
                 </li>
             )

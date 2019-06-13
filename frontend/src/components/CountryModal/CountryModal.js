@@ -16,7 +16,6 @@ class CountryModal extends Component {
         this.handleVariety();
     }
 
-
     handleVariety = async () => {
         const varietyUrl = await fetch('https://wine.frb.io/api/varieties');
         const varietyResult = await varietyUrl.json();
@@ -78,21 +77,21 @@ class CountryModal extends Component {
 
         const bestWine = this.state.wineLoaded && this.state.wineResult[currCountry] !== undefined ?
             this.state.wineResult[currCountry].map((el, i) => {
-
-                el.color === "red" ? color = "#D71140" : el.color === "white" ? color = "#b3b3b3" : color = "#EE98AC";
+                console.log(el)
+                el.color === "red" ? color = "#D71140" : el.color === "white" ? color = "rgb(255, 232, 181)" : color = "#EE98AC";
 
                 return <li key={i} className="wineList">
                     <div className="coloredDiv" style={{
                         width: "16px", height: "16px", backgroundColor: color, borderRadius: "50%"
                     }} />
-                    <p className="bestWines">{el.name}</p>
+                    <p className="bestWines">{`${el.designation} ${el.variety} ${el.date}`}</p>
                 </li>;
             })
             : null;
         const variety = this.state.variety[currCountry] === undefined ?
             null :
             this.state.variety[currCountry].map((el, i) => {
-                return <li key={i}><p>{el.variety} : {el.count} wines in this variety</p></li>
+                return <li key={i}><p>{el.variety} : {el.count} wines</p></li>
             });
 
 
@@ -113,7 +112,7 @@ class CountryModal extends Component {
                     </div>
                     <div className="varietyContainer container">
                         <Title>Distribution of grape variety</Title>
-                        {variety}
+                        <ul className="varietyList">{variety}</ul>
                     </div>
                 </div>
             </CountryModalStyled>

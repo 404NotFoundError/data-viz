@@ -34,7 +34,6 @@ export const CountryModalStyled = styled.div`
         font-weight:bold;
     }
     .container{
-        height:30vh;
         font-family: 'Muli', sans-serif;
         font-style: normal;
         & li{
@@ -48,6 +47,25 @@ export const CountryModalStyled = styled.div`
         }
         .wineList{
             justify-content: space-between;
+        }
+    }
+    .varietyList {
+        overflow: scroll;
+        height: 200px;
+        margin-top: 10px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
         }
     }
 `;

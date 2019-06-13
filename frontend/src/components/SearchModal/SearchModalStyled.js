@@ -144,9 +144,13 @@ const SearchModalStyled = styled.div`
                 font-style: normal;
                 font-weight: bold;
                 font-size: 14px;
-                line-height: 20px;
                 text-transform: uppercase;
-                line-height:20px;
+                line-height:16px;
+                &:hover {
+                    cursor: pointer;
+                    opacity: .4;
+                    transition: ease-in-out .2s;
+                }
             }
             float:right;
         }
@@ -161,6 +165,7 @@ const SearchModalStyled = styled.div`
                 font-size: 13px;
                 margin-top:16px;
                 color:#2E133C;
+                padding-left: 9px;
             }
         }
         &__wineContent
@@ -178,12 +183,14 @@ const SearchModalStyled = styled.div`
     }
     .selected::before, .hovered::before{
             content:" ";
-            width:15px;
-            height:15px;
+            width:8px;
+            height:8px;
             border-radius:50%;
             background-color:#F6C825;
-            left:-15px;
             position:absolute;
+            left: -7px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 `;
 
