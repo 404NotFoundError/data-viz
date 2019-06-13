@@ -5,8 +5,8 @@ const AboutUsStyled = styled.div`
     display: ${props => props.isActive ? 'block' : 'none'};
     position: absolute;
     z-index: 100;
-    width: 50vw;
-    height: 55vh;
+    width: 760px;
+    height: 470px;
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);

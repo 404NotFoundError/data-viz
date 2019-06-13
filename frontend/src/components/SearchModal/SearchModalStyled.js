@@ -127,6 +127,11 @@ const SearchModalStyled = styled.div`
             transform: translateX(-50%);
             cursor: pointer;
             border:none;
+
+            a {
+                color: ${White};
+                padding: 10px 37px;
+            }
         }
         &__alphabet
         { 

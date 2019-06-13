@@ -10,7 +10,7 @@ class SearchModal extends Component {
         inputValue: "",
         resultWine: [],
         alphabet: [":", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-        link: "",
+        link: 0,
         maxWineDisplayed: 500,
         letterSelected: false,
         targetedWine: null
@@ -173,18 +173,8 @@ class SearchModal extends Component {
                         </ul>
                         <p onClick={this.displayMoreWines}>Display more wine</p>
                     </div>
-                    <button className="searchModal__moreDetailsBtn">{this.state.link !== "" ? <Link to={`/single/${this.state.link}`}>More details</Link> : "More details"}</button>
+                    {this.state.link !== 0 && (<button className="searchModal__moreDetailsBtn"><Link to={`/single/${this.state.link}`}>More details</Link></button>)}
                 </div>
-                <div className="searchModal__resultsContainer">
-                    <ul className="searchModal__alphabet">
-                        {alphabetList}
-                    </ul>
-                    <ul className="searchModal__resultContent">
-                        {this.state.inputValue.length !== 0 || this.state.letterSelected ? wineList : initWineList}
-                    </ul>
-                    <p onClick={this.displayMoreWines}>Display more wine</p>
-                </div>
-                {this.state.link !== "" && (<button className="searchModal__moreDetailsBtn"><Link to={`/single/${this.state.link}`}>More details</Link></button>)}
             </SearchModalStyled>
         );
     }
