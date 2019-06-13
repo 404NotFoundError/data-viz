@@ -61,7 +61,7 @@ class DatavizPage extends Component {
         titleDisplayed: 'World',
         activeFilters: { grade: false, vintage: false, price: false, taste: false, colors: true },
         grade: [80, 99],
-        vintage: [1930, 2016],
+        vintage: [1992, 2016],
         price: [4, 2500],
         taste: [],
         step: localStorage.getItem('tuto') ? localStorage.getItem('tuto') : 0,
@@ -141,7 +141,7 @@ class DatavizPage extends Component {
         } else if (filter === "vintage") {
             this.setState({
                 activeFilters,
-                [filter]: [1929, 2017],
+                [filter]: [1992, 2017],
                 currentFilter: ''
             })
         } else if (filter === "grade") {
@@ -168,7 +168,7 @@ class DatavizPage extends Component {
     updateFilterData = (filter, data) => {
         const activeFilters = this.state.activeFilters;
         if (filter === 'vintage') {
-            activeFilters.vintage = (data[0] === 1929 && data[1] === 2017) ? false : true;
+            activeFilters.vintage = (data[0] === 1992 && data[1] === 2017) ? false : true;
         }
         if (filter === 'grade') {
             activeFilters.grade = (data[0] === 80 && data[1] === 99) ? false : true;
