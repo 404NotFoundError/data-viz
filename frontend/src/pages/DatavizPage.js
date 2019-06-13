@@ -30,26 +30,6 @@ const SearchIcon = ({ toggleSearch }) => (
     </svg>
 );
 
-const countryIconStyle = {
-    position: 'absolute',
-    zIndex: 10,
-    top: 91,
-    right: 43,
-    outline: 'none',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    marginLeft: 20,
-    width: 18,
-    height: 18
-};
-
-const CountryIcon = ({ toggleCountryModal, currCountry }) => (
-    <div onClick={() => toggleCountryModal(true)} style={countryIconStyle}>
-        <img key={currCountry} style={{ width: 18, height: 18 }} src={require(`../static/images/countries/${currCountry.toLowerCase()}.png`)} alt="Country flag" className="countryFlag" />
-    </div>
-);
-
 class DatavizPage extends Component {
     state = {
         countries: [],
@@ -286,9 +266,12 @@ class DatavizPage extends Component {
                         toggleSearch={this.toggleSearch}
                         wines={wines}
                     />
-                    {currCountry && (
-                        <CountryIcon toggleCountryModal={this.toggleCountryModal} currCountry={currCountry} />
-                    )}
+                    {/* {currCountry && (
+                        <CountryIcon 
+                            toggleCountryModal={this.toggleCountryModal}
+                            currCountry={currCountry}
+                        />
+                    )} */}
                     <CountryModal
                         isCountryOpen={isCountryOpen}
                         toggleCountryModal={this.toggleCountryModal}
@@ -302,6 +285,7 @@ class DatavizPage extends Component {
                         step={step}
                         wines={winesLength}
                         currCountry={currCountry}
+                        toggleCountryModal={this.toggleCountryModal}
                     />
                     <Filter
                         currentFilter={currentFilter}

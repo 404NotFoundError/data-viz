@@ -255,9 +255,19 @@ class MapTest extends React.PureComponent {
     const { zoom, center, redirect } = this.state;
     const { wines } = this.props;
 
-    if (!wines.length) return <div style={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <img src={Loader} alt="wine glass" style={{ width: "25%" }} />
-    </div>
+    if (!wines.length) {
+      return (
+        <div style={{ 
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}>
+          <img src={Loader} alt="wine glass" style={{ width: "25%" }} />
+        </div>
+      )
+    }
 
     return (
       <Fragment>

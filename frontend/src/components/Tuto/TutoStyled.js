@@ -24,8 +24,8 @@ const TutoStyled = styled.div`
     .tutoContainer {
         &__markers {
             display: flex;
-            top: calc(50% - 158px);
-            left: calc(50% + 90px);
+            top: calc(50% - 238px);
+            left: calc(50% + 145px);
             position: absolute;
             align-items: center;
 

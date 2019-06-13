@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Logo from '../components/Logo/Logo';
 import TasteSingle from "../components/TasteSingle/TasteSingle";
 import { Red, White } from "../helpers/const";
+import wineBottle from "../static/images/wine-bottle.png";
+import Bouzereau from "../static/images/bouzereau.png";
 
 const colors = {
     "red": Red,
@@ -13,6 +15,25 @@ const colors = {
 const SinglePageStyled = styled.div`
     background: linear-gradient(180deg, #2D1563 -16%, #0F0422 100%);
     height: 100vh;
+
+    .wineBottle {
+        width: 130px;
+        height: 460px;
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        transform: translateX(-50%) translateY(-50%);
+        z-index: 10000;
+    }
+
+    .bouzereau {
+        height: 520px;
+        position: absolute;
+        top: 50%;
+        left: 30%;
+        transform: translateX(-50%) translateY(-50%);
+        z-index: 10000;
+    }
 
     .singleContainer {
         width: 70%;
@@ -54,6 +75,7 @@ const SinglePageStyled = styled.div`
                 letter-spacing: -0.04em;
                 color: #2E133C;
                 margin-top: 25px;
+                max-width: 600px;
             }
             .localisation {
                 display: flex;
@@ -110,7 +132,7 @@ const SinglePageStyled = styled.div`
                 font-family: "Muli", sans-serif;
                 font-style: normal;
                 font-weight: normal;
-                font-size: 20px;
+                font-size: 18px;
                 line-height: 28px;
                 color: #2E133C;
                 max-width: 600px;
@@ -191,13 +213,16 @@ class SinglePage extends Component {
     render() {
         const { wine } = this.state;
 
-        console.log(wine);
-
         if (!wine.name) return null;
 
         return (
             <SinglePageStyled color={wine.color}>
                 <Logo />
+                {wine.name === "Domaine Jean-Marie Bouzereau Bourgogne Aligoté 2017" ?
+                    <img className="bouzereau" src={Bouzereau} alt="Bottle of wine" />
+                    :
+                    <img className="wineBottle" src={wineBottle} alt="Bottle of wine" />
+                }
                 <div className="singleContainer">
                     <div className="singleContainer__wrapper">
                         <a className="backBtn" href="/dataviz">
@@ -206,7 +231,7 @@ class SinglePage extends Component {
                             </svg>
                             <p className="text">back to map</p>
                         </a>
-                        <h1 className="name">{wine.name.replace(/\s*\(.*\)\s*$/gm, "")}</h1>
+                        <h1 className="name">{wine.designation} {wine.variety} {wine.date}</h1>
                         <div className="localisation">
                             <img className="countryFlag" style={{width: 16, height: 16}} src={require(`../static/images/countries/${wine.country.toLowerCase()}.png`)} alt="Country flag" />
                             <p className="localisation__country">{wine.country}</p>

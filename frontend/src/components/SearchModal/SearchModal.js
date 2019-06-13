@@ -134,7 +134,9 @@ class SearchModal extends Component {
         });
         //display a range of wine
         const initWineList = alphabeticWines.slice(0, this.state.maxWineDisplayed).map(wine => {
-            if (wine.name[0] === ":") return null;
+            if (wine.name) {
+                if (wine.name[0] === ":") return null;
+            }
             return (
                 <li key={`${wine.id}${wine.name}`}
                     style={{ position: "relative" }}
@@ -149,7 +151,9 @@ class SearchModal extends Component {
             )
         });
         const wineList = this.state.resultWine.slice(0, this.state.maxWineDisplayed).map(wine => {
-            if (wine.name[0] === ":") return null;
+            if (wine.name) {
+                if (wine.name[0] === ":") return null;
+            }
             return (
                 <li key={`${wine.id}${wine.name}`}
                     style={{ position: "relative" }}
@@ -185,7 +189,7 @@ class SearchModal extends Component {
                         <ul className="searchModal__resultContent">
                             {this.state.inputValue.length !== 0 || this.state.letterSelected ? wineList : initWineList}
                         </ul>
-                        <p onClick={this.displayMoreWines}>Display more wine</p>
+                        {/* <p onClick={this.displayMoreWines}>Display more wine</p> */}
                     </div>
                     {this.state.link !== 0 && (<button className="searchModal__moreDetailsBtn"><Link to={`/single/${this.state.link}`}>More details</Link></button>)}
                 </div>
