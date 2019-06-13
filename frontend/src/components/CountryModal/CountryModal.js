@@ -6,7 +6,8 @@ class CountryModal extends Component {
     state = {
         averageResult: [],
         wineResult: {},
-        wineLoaded: false
+        wineLoaded: false,
+        variety: {}
     }
     componentWillMount() {
         this.handleAverage();
@@ -14,10 +15,19 @@ class CountryModal extends Component {
         // this.test();
     }
 
+    componentWillUpdate() {
+        console.log(this.props.isCountryOpen)
+        // this.props.isCountryOpen ? this.test() : null;
+        if (!this.props.isCountryOpen) {
+        }
+    }
+
     test = async () => {
         const testurl = await fetch('https://wine.frb.io/api/varieties');
         const testResult = await testurl.json();
-        console.log(testResult.results)
+        this.setState({
+            variety: testResult.results
+        });
     }
 
     handleAverage = async () => {

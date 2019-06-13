@@ -73,8 +73,8 @@ class DatavizPage extends Component {
     }
 
     init = async () => {
-        // const winesRes = await fetch(winesURL);
-        // const { wines } = await winesRes.json();
+        const winesRes = await fetch(winesURL);
+        const { wines } = await winesRes.json();
 
         const countriesRes = await fetch(countriesURL);
         const { countries } = await countriesRes.json();
