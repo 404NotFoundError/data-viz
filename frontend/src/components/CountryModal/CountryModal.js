@@ -54,13 +54,12 @@ class CountryModal extends Component {
         for (let i = 0; i < sortedAverage.length; i++) {
             if (sortedAverage[i].country === this.props.currCountry) {
                 result.push(
-                    sortedAverage[i - 1] !== undefined ? sortedAverage[i + 1] : null,
+                    sortedAverage[i - 1] === undefined ? sortedAverage[i + 2] : sortedAverage[i - 1],
                     sortedAverage[i],
-                    sortedAverage[i + 1] !== undefined ? sortedAverage[i - 1] : null
+                    sortedAverage[i + 1] === undefined ? sortedAverage[i - 2] : sortedAverage[i + 1]
                 );
             }
         }
-
         return result;
     }
 

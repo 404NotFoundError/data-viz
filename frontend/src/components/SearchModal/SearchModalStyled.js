@@ -165,12 +165,21 @@ const SearchModalStyled = styled.div`
            cursor:pointer;
         }
     }
-    .hovered
+    .hovered, .selected
     {
         opacity: 1;
         transition: .2s ease-in-out;
         font-weight:bold !important;
     }
+    .selected::before, .hovered::before{
+            content:" ";
+            width:15px;
+            height:15px;
+            border-radius:50%;
+            background-color:#F6C825;
+            left:-15px;
+            position:absolute;
+        }
 `;
 
 export default SearchModalStyled;

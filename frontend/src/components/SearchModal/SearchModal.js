@@ -12,7 +12,8 @@ class SearchModal extends Component {
         alphabet: [":", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
         link: "",
         maxWineDisplayed: 500,
-        letterSelected: false
+        letterSelected: false,
+        targetedWine: null
     }
 
     onInputChange = e => {
@@ -54,10 +55,16 @@ class SearchModal extends Component {
     }
 
     onSingleWineClick = e => {
+        e.target.classList.add('selected');
+        if (this.state.targetedWine !== null) {
+            this.state.targetedWine.classList.remove('selected');
+        }
+
         let link = e.target.value;
         if (link !== 0) {
             this.setState({
-                link
+                link,
+                targetedWine: e.target
             });
         }
     }
@@ -91,6 +98,16 @@ class SearchModal extends Component {
         });
     }
 
+    onKeyPress = (e) => {
+        if (e.key == "Enter") {
+            this.setState({
+                inputValue: e.target.value
+            }, () => {
+                this.userInputValidation();
+            });
+        }
+    }
+
     render() {
         const { toggleSearch, isSearchOpen, wines } = this.props;
         //display the alphabet 
@@ -109,6 +126,7 @@ class SearchModal extends Component {
         const initWineList = alphabeticWines.slice(0, this.state.maxWineDisplayed).map(wine => {
             return (
                 <li key={`${wine.id}${wine.name}`}
+                    style={{ position: "relative" }}
                     onClick={e => this.onSingleWineClick(e)}
                     value={wine.id}
                     className="searchModal__wineContent"
@@ -121,6 +139,7 @@ class SearchModal extends Component {
         const wineList = this.state.resultWine.slice(0, this.state.maxWineDisplayed).map(wine => {
             return (
                 <li key={`${wine.id}${wine.name}`}
+                    style={{ position: "relative" }}
                     onClick={e => this.onSingleWineClick(e)}
                     value={wine.id}
                     className="searchModal__wineContent"
@@ -143,7 +162,7 @@ class SearchModal extends Component {
                         <svg className="logoSearch" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={this.onSearchClick}>
                             <path fillRule="evenodd" clipRule="evenodd" d="M15.0372 13.5372C15.8046 12.469 16.255 11.1616 16.255 9.75488C16.255 6.16488 13.345 3.25488 9.755 3.25488C6.165 3.25488 3.255 6.16488 3.255 9.75488C3.255 13.3449 6.165 16.2549 9.755 16.2549C11.1617 16.2549 12.4691 15.8045 13.5373 15.0371L19.255 20.7449L20.745 19.2549L15.0372 13.5372ZM5.255 9.75488C5.255 12.2449 7.26501 14.2549 9.755 14.2549C12.245 14.2549 14.255 12.2449 14.255 9.75488C14.255 7.26488 12.245 5.25488 9.755 5.25488C7.26501 5.25488 5.255 7.26488 5.255 9.75488Z" fill={Fog} />
                         </svg>
-                        <input className="inputSearch" type="text" placeholder="Search a wine" value={this.state.inputValue} onChange={e => this.onInputChange(e)} />
+                        <input className="inputSearch" type="text" placeholder="Search a wine" value={this.state.inputValue} onChange={e => this.onInputChange(e)} onKeyPress={this.onKeyPress} />
                     </div>
                     <div className="searchModal__resultsContainer">
                         <ul className="searchModal__alphabet">
@@ -161,15 +180,14 @@ class SearchModal extends Component {
                         {alphabetList}
                     </ul>
                     <ul className="searchModal__resultContent">
-                        {/* {wineList} */}
                         {this.state.inputValue.length !== 0 || this.state.letterSelected ? wineList : initWineList}
                     </ul>
                     <p onClick={this.displayMoreWines}>Display more wine</p>
                 </div>
                 {this.state.link !== "" && (<button className="searchModal__moreDetailsBtn"><Link to={`/single/${this.state.link}`}>More details</Link></button>)}
-        </SearchModalStyled>
-    );
-}
+            </SearchModalStyled>
+        );
+    }
 };
 
 export default SearchModal;
