@@ -3,6 +3,8 @@ import ReactMapboxGl, { Layer, Feature, Marker } from 'react-mapbox-gl';
 import ClusterCustom from './ClusterCustom/ClusterCustom';
 import { Redirect } from 'react-router-dom';
 
+import Loader from "../static/images/loader.gif";
+
 const bounds = [
   [-180, -65], // Southwest coordinates
   [180, 85]  // Northeast coordinates
@@ -85,63 +87,63 @@ class MapTest extends React.PureComponent {
         return true;
       });
 
-			if (step === "continents") {
-				return (
-					<Fragment>
-						{ continents.map((continent, i) => {
+    if (step === "continents") {
+      return (
+        <Fragment>
+          {continents.map((continent, i) => {
 
-              const currContinentWines = wines.filter((wine, i) => (wine.continent === continent.name));
-              const redWines = currContinentWines.filter(wine => wine.color === "red");
-              const whiteWines = currContinentWines.filter(wine => wine.color === "white");
-              const pinkWines = currContinentWines.filter(wine => wine.color === "pink");
+            const currContinentWines = wines.filter((wine, i) => (wine.continent === continent.name));
+            const redWines = currContinentWines.filter(wine => wine.color === "red");
+            const whiteWines = currContinentWines.filter(wine => wine.color === "white");
+            const pinkWines = currContinentWines.filter(wine => wine.color === "pink");
 
-              const wineNumber = currContinentWines.length;
-              
-              if (!wineNumber) return null;
+            const wineNumber = currContinentWines.length;
 
-              const colorData = [
-                currentColors.red ? redWines.length : 0,
-                currentColors.white ? whiteWines.length : 0,
-                currentColors.pink ? pinkWines.length : 0,
-              ];
+            if (!wineNumber) return null;
 
-              return (
-                <Marker
+            const colorData = [
+              currentColors.red ? redWines.length : 0,
+              currentColors.white ? whiteWines.length : 0,
+              currentColors.pink ? pinkWines.length : 0,
+            ];
+
+            return (
+              <Marker
                 key={i}
                 coordinates={[continent.longitude, continent.latitude]}
-                >
-                  <ClusterCustom
-                    name={continent.name}
-                    changeCenter={() => this.changeCenter(continent.longitude, continent.latitude, 3.9)}
-                    wineNumber={colorData.reduce((a, b) => a + b) + currContinentWines.filter(wine => wine.color === "").length}
-                    data={colorData}
-                  />
-                </Marker>
-              )              
-						})}
-					</Fragment>
-				)	
-			}
-			if (step === "countries") {
-				return (
-					<Fragment>
-						{ countries.map((countrie, i) => {
-              if (countrie.name === currCountry) {
-                const currCountryWines = wines.filter((wine, i) => (wine.country === currCountry));
-                const redWines = currCountryWines.filter(wine => wine.color === "red");
-                const whiteWines = currCountryWines.filter(wine => wine.color === "white");
-                const pinkWines = currCountryWines.filter(wine => wine.color === "pink");
-                // const elseWines = currCountryWines.filter(wine => wine.color === "");
+              >
+                <ClusterCustom
+                  name={continent.name}
+                  changeCenter={() => this.changeCenter(continent.longitude, continent.latitude, 3.9)}
+                  wineNumber={colorData.reduce((a, b) => a + b) + currContinentWines.filter(wine => wine.color === "").length}
+                  data={colorData}
+                />
+              </Marker>
+            )
+          })}
+        </Fragment>
+      )
+    }
+    if (step === "countries") {
+      return (
+        <Fragment>
+          {countries.map((countrie, i) => {
+            if (countrie.name === currCountry) {
+              const currCountryWines = wines.filter((wine, i) => (wine.country === currCountry));
+              const redWines = currCountryWines.filter(wine => wine.color === "red");
+              const whiteWines = currCountryWines.filter(wine => wine.color === "white");
+              const pinkWines = currCountryWines.filter(wine => wine.color === "pink");
+              // const elseWines = currCountryWines.filter(wine => wine.color === "");
 
-                return (
-                  <Fragment key={`fragment__${i}`}>
+              return (
+                <Fragment key={`fragment__${i}`}>
                   {currentColors.red && (
                     <Layer
                       key={`redLayer__${i}`}
                       type="circle"
                       paint={
                         {
-                          "circle-color": "#D71140",
+                          "circle-color": "#D71140",
                           "circle-radius": 3
                         }
                       }
@@ -164,7 +166,7 @@ class MapTest extends React.PureComponent {
                       type="circle"
                       paint={
                         {
-                          "circle-color": "#FFE8B5",
+                          "circle-color": "#FFE8B5",
                           "circle-radius": 3
                         }
                       }
@@ -186,7 +188,7 @@ class MapTest extends React.PureComponent {
                       type="circle"
                       paint={
                         {
-                          "circle-color": "#EE98AC",
+                          "circle-color": "#EE98AC",
                           "circle-radius": 3
                         }
                       }
@@ -195,7 +197,7 @@ class MapTest extends React.PureComponent {
                         pinkWines.map((wine, index) => (
                           <Feature
                             key={`pinkWine__${index}`}
-                            coordinates={[wine.longitude, wine.latitude]} 
+                            coordinates={[wine.longitude, wine.latitude]}
                             onClick={() => this.setRedirect(wine.id)}
                           />
                         ))
@@ -224,50 +226,52 @@ class MapTest extends React.PureComponent {
                       }
                     </Layer>
                   )} */}
-                  </Fragment>
-                ); 
-              }
+                </Fragment>
+              );
+            }
 
-              const currCountryWines = wines.filter((wine, i) => (wine.country === countrie.name));
-              const redWines = currCountryWines.filter(wine => wine.color === "red");
-              const whiteWines = currCountryWines.filter(wine => wine.color === "white");
-              const pinkWines = currCountryWines.filter(wine => wine.color === "pink");
+            const currCountryWines = wines.filter((wine, i) => (wine.country === countrie.name));
+            const redWines = currCountryWines.filter(wine => wine.color === "red");
+            const whiteWines = currCountryWines.filter(wine => wine.color === "white");
+            const pinkWines = currCountryWines.filter(wine => wine.color === "pink");
 
-              const wineNumber = currCountryWines.length;
-              
-              if (!wineNumber) return null;
+            const wineNumber = currCountryWines.length;
 
-              const colorData = [
-                currentColors.red ? redWines.length : 0,
-                currentColors.white ? whiteWines.length : 0,
-                currentColors.pink ? pinkWines.length : 0,
-              ];
+            if (!wineNumber) return null;
 
-              return (
-                <Marker
-                  key={i}
-                  coordinates={[countrie.longitude, countrie.latitude]}
-                >
-                  <ClusterCustom
-                    name={countrie.name}
-                    changeCurrCountry={changeCurrCountry}
-                    changeCenter={() => this.changeCenter(countrie.longitude, countrie.latitude)}
-                    wineNumber={colorData.reduce((a, b) => a + b) + currCountryWines.filter(wine => wine.color === "").length}
-                    data={colorData}
-                  />
-                </Marker>
-              )
-            })}
-					</Fragment>
-				)
-      }
+            const colorData = [
+              currentColors.red ? redWines.length : 0,
+              currentColors.white ? whiteWines.length : 0,
+              currentColors.pink ? pinkWines.length : 0,
+            ];
+
+            return (
+              <Marker
+                key={i}
+                coordinates={[countrie.longitude, countrie.latitude]}
+              >
+                <ClusterCustom
+                  name={countrie.name}
+                  changeCurrCountry={changeCurrCountry}
+                  changeCenter={() => this.changeCenter(countrie.longitude, countrie.latitude)}
+                  wineNumber={colorData.reduce((a, b) => a + b) + currCountryWines.filter(wine => wine.color === "").length}
+                  data={colorData}
+                />
+              </Marker>
+            )
+          })}
+        </Fragment>
+      )
     }
+  }
 
   render() {
     const { zoom, center, redirect } = this.state;
     const { wines } = this.props;
 
-    if (!wines.length) return <div>Loading...</div>
+    if (!wines.length) return <div style={{ width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <img src={Loader} alt="wine glass" style={{ width: "25%" }} />
+    </div>
 
     return (
       <Fragment>
@@ -294,39 +298,39 @@ class MapTest extends React.PureComponent {
 export default MapTest;
 
 const continents = [
-	{
-		latitude: -80.4384681725362, 
-		longitude: 21.306263297311922,
-		name: "Antarctica"
-	},
-	{
-		latitude: -31.065922730080157,
-		longitude: 152.78101519406331,
-		name: "Australia"
-	},
-	{
-		latitude: 56.51520886670177,
-		longitude: -92.32043635079269,
-		name: "North America"
-	},
-	{
-		latitude: 6.426117205286786,
-		longitude: 18.276615276175992,
-		name: "Africa"
-	},
-	{
-		latitude: 55.85406929584602,
+  {
+    latitude: -80.4384681725362,
+    longitude: 21.306263297311922,
+    name: "Antarctica"
+  },
+  {
+    latitude: -31.065922730080157,
+    longitude: 152.78101519406331,
+    name: "Australia"
+  },
+  {
+    latitude: 56.51520886670177,
+    longitude: -92.32043635079269,
+    name: "North America"
+  },
+  {
+    latitude: 6.426117205286786,
+    longitude: 18.276615276175992,
+    name: "Africa"
+  },
+  {
+    latitude: 55.85406929584602,
     longitude: 13.206347134378518,
-		name: "Europe"
-	},
-	{
-		latitude: 44.94789322476297,
-		longitude: 95.75037267845751,
-		name: "Asia"
-	},
-	{
-		latitude: -15.173251268423256,
-		longitude: -60.792112817153885,
-		name: "South America"
-	}
+    name: "Europe"
+  },
+  {
+    latitude: 44.94789322476297,
+    longitude: 95.75037267845751,
+    name: "Asia"
+  },
+  {
+    latitude: -15.173251268423256,
+    longitude: -60.792112817153885,
+    name: "South America"
+  }
 ];
