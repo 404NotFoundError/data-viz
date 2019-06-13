@@ -113,14 +113,12 @@ class HomePage extends Component {
                 </div>
                 <h1 className="title">What is a good wine ?</h1>
                 <p className="desc">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                    nisi ut aliquip ex ea commodo consequat.
+                    More than 40 000 different wines referenced.<br />
+                    Explore, visualize and compare the best bottles of wine in the world with a wide selection of filters.
                 </p>
                 <div>
-                    <div className="aPropos" onClick={() => this.toggleModal(true)}>À propos</div>
-                    <HomeBtn name="Découvrir" url="/dataviz"/>
+                    <div className="aPropos" onClick={() => this.toggleModal(true)}>About</div>
+                    <HomeBtn name="Discover" url="/dataviz"/>
                 </div>
             </HomePageStyled>
         );

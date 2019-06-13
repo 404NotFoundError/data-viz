@@ -13,7 +13,7 @@ const SearchModalStyled = styled.div`
     background: white;
 
    .searchModal {
-       a{
+       a {
            text-decoration:none;
        }
        position: relative;
@@ -90,11 +90,25 @@ const SearchModalStyled = styled.div`
             }
         }
         &__resultsContainer {
-            border: 1px dotted lightgrey;
+            /* border: 1px dotted lightgrey; */
             width: 100%;
             height: calc(100vh - 174px);
             margin: 32px 0px 29px 0px;
             overflow-y:scroll;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            &::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+            }
         }
         &__moreDetailsBtn {
             font-family: 'Muli', sans-serif;
@@ -119,7 +133,7 @@ const SearchModalStyled = styled.div`
             position:sticky;
             top:0px;
             li{
-                margin:0.25rem;
+                /* margin:0.25rem; */
                 color:#2E133C;
                 font-family: Karla;
                 font-style: normal;

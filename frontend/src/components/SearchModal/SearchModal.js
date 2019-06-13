@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 
 class SearchModal extends Component {
-
     state = {
         wines: [],
         inputValue: "",
@@ -15,14 +14,17 @@ class SearchModal extends Component {
         maxWineDisplayed: 500,
         letterSelected: false
     }
+
     onInputChange = e => {
         this.setState({
             inputValue: e.target.value
         });
     }
+
     onSearchClick = () => {
         this.userInputValidation();
     }
+
     userInputValidation = () => {
 
         const userValue = this.state.inputValue;
@@ -36,6 +38,7 @@ class SearchModal extends Component {
             });
         }
     }
+
     returnSearchResult = () => {
         let resultWine = this.props.wines.filter(el => {
             if (el.name.toUpperCase().indexOf(this.state.inputValue.toUpperCase()) >= 0) {
@@ -62,6 +65,7 @@ class SearchModal extends Component {
     onSingleWineMouseEnter = e => {
         e.target.classList.add("hovered");
     }
+
     onSingleWineMouseLeave = e => {
         e.target.classList.remove("hovered");
     }
@@ -151,7 +155,7 @@ render() {
                     </ul>
                     <p onClick={this.displayMoreWines}>Display more wine</p>
                 </div>
-                <button className="searchModal__moreDetailsBtn">{this.state.link !== "" ? <Link to={`/single/${this.state.link}`}>More details</Link> : "More details"}</button>
+                {this.state.link !== "" && (<button className="searchModal__moreDetailsBtn"><Link to={`/single/${this.state.link}`}>More details</Link></button>)}
             </div>
         </SearchModalStyled>
     );
