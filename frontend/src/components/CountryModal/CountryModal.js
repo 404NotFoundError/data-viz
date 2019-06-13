@@ -60,14 +60,10 @@ class CountryModal extends Component {
                 );
             }
         }
-
-        console.log(result)
-
         return result;
     }
 
     render() {
-        console.log(this.state.averageResult)
         const { toggleCountryModal, isCountryOpen, currCountry } = this.props;
 
         const filtredCountry = this.filteredAverageCountry().map((el, i) => {
