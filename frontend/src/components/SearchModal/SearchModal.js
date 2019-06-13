@@ -12,7 +12,8 @@ class SearchModal extends Component {
         alphabet: [":", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
         link: "",
         maxWineDisplayed: 500,
-        letterSelected: false
+        letterSelected: false,
+        targetedWine: null
     }
 
     onInputChange = e => {
@@ -54,10 +55,16 @@ class SearchModal extends Component {
     }
 
     onSingleWineClick = e => {
+        e.target.classList.add('selected');
+        if (this.state.targetedWine !== null) {
+            this.state.targetedWine.classList.remove('selected');
+        }
+
         let link = e.target.value;
         if (link !== 0) {
             this.setState({
-                link
+                link,
+                targetedWine: e.target
             });
         }
     }
