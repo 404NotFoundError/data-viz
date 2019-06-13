@@ -158,8 +158,8 @@ class MapTest extends React.PureComponent {
                           <Feature
                             key={`redWine__${index}`}
                             coordinates={[wine.longitude, wine.latitude]}
-                            onClick={() => this.setRedirect(wine.id)}
-                            // onClick={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price, wine.id)}
+                            onClick={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price, wine.id)}
+                            // onClick={() => this.setRedirect(wine.id)}
                             // onMouseEnter={e => this.mouseOverWine(e)}
                             // onMouseEnter={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price)}
                             // onMouseLeave={() => toggleToolTip(false)}
@@ -184,8 +184,8 @@ class MapTest extends React.PureComponent {
                           <Feature
                             key={`whiteWine__${index}`}
                             coordinates={[wine.longitude, wine.latitude]}
-                            // onClick={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price, wine.id)}
-                            onClick={() => this.setRedirect(wine.id)}
+                            onClick={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price, wine.id)}
+                            // onClick={() => this.setRedirect(wine.id)}
                             // onMouseEnter={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price)}
                             // onMouseLeave={() => toggleToolTip(false)}
                           />
@@ -209,8 +209,8 @@ class MapTest extends React.PureComponent {
                           <Feature
                             key={`pinkWine__${index}`}
                             coordinates={[wine.longitude, wine.latitude]}
-                            // onClick={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price, wine.id)}
-                            onClick={() => this.setRedirect(wine.id)}
+                            onClick={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price, wine.id)}
+                            // onClick={() => this.setRedirect(wine.id)}
                             // onMouseEnter={() => toggleToolTip(true, `${wine.designation} ${wine.variety} ${wine.date}`, wine.grade, wine.price)}
                             // onMouseLeave={() => toggleToolTip(false)}
                           />
