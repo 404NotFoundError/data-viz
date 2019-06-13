@@ -35,5 +35,34 @@ class TasteWine
      */
     private $idWine;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getIdTaste(): ?int
+    {
+        return $this->idTaste;
+    }
+
+    public function setIdTaste(int $idTaste): self
+    {
+        $this->idTaste = $idTaste;
+
+        return $this;
+    }
+
+    public function getIdWine(): ?int
+    {
+        return $this->idWine;
+    }
+
+    public function setIdWine(int $idWine): self
+    {
+        $this->idWine = $idWine;
+
+        return $this;
+    }
+
 
 }

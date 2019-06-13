@@ -71,9 +71,9 @@ class Wine
     private $points;
 
     /**
-     * @var \DateTime|null
+     * @var int|null
      *
-     * @ORM\Column(name="date_fabrication", type="date", nullable=true)
+     * @ORM\Column(name="date_fabrication", type="integer", nullable=true)
      */
     private $dateFabrication;
 
@@ -90,6 +90,131 @@ class Wine
      * @ORM\Column(name="id_producteur", type="integer", nullable=false)
      */
     private $idProducteur;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDesignation(): ?string
+    {
+        return $this->designation;
+    }
+
+    public function setDesignation(string $designation): self
+    {
+        $this->designation = $designation;
+
+        return $this;
+    }
+
+    public function getVariety(): ?string
+    {
+        return $this->variety;
+    }
+
+    public function setVariety(string $variety): self
+    {
+        $this->variety = $variety;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?string $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getPoints(): ?string
+    {
+        return $this->points;
+    }
+
+    public function setPoints(string $points): self
+    {
+        $this->points = $points;
+
+        return $this;
+    }
+
+    public function getDateFabrication(): ?\DateTimeInterface
+    {
+        return $this->dateFabrication;
+    }
+
+    public function setDateFabrication(?\DateTimeInterface $dateFabrication): self
+    {
+        $this->dateFabrication = $dateFabrication;
+
+        return $this;
+    }
+
+    public function getIdTesteur(): ?int
+    {
+        return $this->idTesteur;
+    }
+
+    public function setIdTesteur(?int $idTesteur): self
+    {
+        $this->idTesteur = $idTesteur;
+
+        return $this;
+    }
+
+    public function getIdProducteur(): ?int
+    {
+        return $this->idProducteur;
+    }
+
+    public function setIdProducteur(int $idProducteur): self
+    {
+        $this->idProducteur = $idProducteur;
+
+        return $this;
+    }
 
 
 }
