@@ -78,6 +78,15 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.3.3"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.5.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -96,11 +105,17 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/log": {
         "version": "1.1.0"
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "2.0.5"
     },
     "symfony/cache": {
         "version": "v4.2.8"
@@ -197,6 +212,12 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.11.0"
     },
+    "symfony/polyfill-php72": {
+        "version": "v1.11.0"
+    },
+    "symfony/profiler-pack": {
+        "version": "v1.0.4"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -215,11 +236,48 @@
     "symfony/stopwatch": {
         "version": "v4.2.8"
     },
+    "symfony/twig-bridge": {
+        "version": "v4.2.8"
+    },
+    "symfony/twig-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "369b5b29dc52b2c190002825ae7ec24ab6f962dd"
+        },
+        "files": [
+            "config/packages/twig.yaml",
+            "config/routes/dev/twig.yaml",
+            "templates/base.html.twig"
+        ]
+    },
+    "symfony/var-dumper": {
+        "version": "v4.2.8"
+    },
     "symfony/var-exporter": {
         "version": "v4.2.8"
     },
+    "symfony/web-profiler-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "6bdfa1a95f6b2e677ab985cd1af2eae35d62e0f6"
+        },
+        "files": [
+            "config/packages/dev/web_profiler.yaml",
+            "config/packages/test/web_profiler.yaml",
+            "config/routes/dev/web_profiler.yaml"
+        ]
+    },
     "symfony/yaml": {
         "version": "v4.2.8"
+    },
+    "twig/twig": {
+        "version": "v2.10.0"
     },
     "zendframework/zend-code": {
         "version": "3.3.1"
