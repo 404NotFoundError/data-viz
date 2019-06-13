@@ -36,14 +36,43 @@ class Productor
     private $idCountry;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $longitude;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $latitude;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getIdCountry(): ?int
+    {
+        return $this->idCountry;
+    }
+
+    public function setIdCountry(?int $idCountry): self
+    {
+        $this->idCountry = $idCountry;
+
+        return $this;
+    }
 
     public function getLongitude(): ?string
     {
@@ -62,12 +91,11 @@ class Productor
         return $this->latitude;
     }
 
-    public function setLatitude(?string $latitude): self
+    public function setLatitude(string $latitude): self
     {
         $this->latitude = $latitude;
 
         return $this;
     }
-
 
 }

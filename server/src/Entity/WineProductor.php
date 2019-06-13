@@ -35,5 +35,34 @@ class WineProductor
      */
     private $idProductor;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getIdWine(): ?int
+    {
+        return $this->idWine;
+    }
+
+    public function setIdWine(int $idWine): self
+    {
+        $this->idWine = $idWine;
+
+        return $this;
+    }
+
+    public function getIdProductor(): ?int
+    {
+        return $this->idProductor;
+    }
+
+    public function setIdProductor(int $idProductor): self
+    {
+        $this->idProductor = $idProductor;
+
+        return $this;
+    }
+
 
 }
