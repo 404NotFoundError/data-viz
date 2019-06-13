@@ -9,9 +9,9 @@ class CountryModal extends Component {
         wineLoaded: false
     }
     componentWillMount() {
-        // this.handleAverage();
-        // this.handleBestWine();
-        this.test();
+        this.handleAverage();
+        this.handleBestWine();
+        // this.test();
     }
 
     test = async () => {
