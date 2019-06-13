@@ -177,7 +177,7 @@ const SearchModalStyled = styled.div`
             height:15px;
             border-radius:50%;
             background-color:#F6C825;
-            left:10px;
+            left:-15px;
             position:absolute;
         }
 `;

@@ -126,6 +126,7 @@ class SearchModal extends Component {
         const initWineList = alphabeticWines.slice(0, this.state.maxWineDisplayed).map(wine => {
             return (
                 <li key={`${wine.id}${wine.name}`}
+                    style={{ position: "relative" }}
                     onClick={e => this.onSingleWineClick(e)}
                     value={wine.id}
                     className="searchModal__wineContent"
@@ -138,6 +139,7 @@ class SearchModal extends Component {
         const wineList = this.state.resultWine.slice(0, this.state.maxWineDisplayed).map(wine => {
             return (
                 <li key={`${wine.id}${wine.name}`}
+                    style={{ position: "relative" }}
                     onClick={e => this.onSingleWineClick(e)}
                     value={wine.id}
                     className="searchModal__wineContent"
