@@ -35,6 +35,7 @@ export const NumberOfWines = styled.h4`
     line-height: 14px;
     text-align: center;
     letter-spacing: -0.04em;
+    min-width: 60px;
 
     position: absolute;
     top: 50%;

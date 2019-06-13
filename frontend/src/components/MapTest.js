@@ -102,7 +102,7 @@ class MapTest extends React.PureComponent {
               const colorData = [
                 currentColors.red ? redWines.length : 0,
                 currentColors.white ? whiteWines.length : 0,
-                currentColors.white ? pinkWines.length : 0,
+                currentColors.pink ? pinkWines.length : 0,
               ];
 
               return (
@@ -240,7 +240,7 @@ class MapTest extends React.PureComponent {
               const colorData = [
                 currentColors.red ? redWines.length : 0,
                 currentColors.white ? whiteWines.length : 0,
-                currentColors.white ? pinkWines.length : 0,
+                currentColors.pink ? pinkWines.length : 0,
               ];
 
               return (

@@ -20,17 +20,17 @@ const AboutUs = ({isActive, toggleModal}) => (
                 <path fillRule="evenodd" clipRule="evenodd" d="M22.1802 1.0813C22.1802 1.08129 22.1802 1.08129 22.1802 1.08129C19.8829 0.741729 17.7452 2.32883 17.4057 4.62617C17.0661 6.92352 18.6532 9.06116 20.9505 9.40072C23.2479 9.74028 25.3855 8.15318 25.7251 5.85584C25.7292 5.82805 25.733 5.80028 25.7366 5.77254L21.5777 5.15783L22.1802 1.0813Z" fill={Red}/>
             </svg>
             <h3 className="AboutUs__title">About us</h3>
-            <h4 className="AboutUs__subtitle">Projet pédagogique <a className="AboutUs__link" href="https://www.hetic.net/"><span className="AboutUs__bold">HÉTIC P2020</span></a></h4>
+            <h4 className="AboutUs__subtitle">Educational project <a className="AboutUs__link" href="https://www.hetic.net/"><span className="AboutUs__bold">HÉTIC P2020</span></a></h4>
             <div className="AboutUs__trait" />
             <p className="AboutUs__names">
-                <a className="AboutUs__link" href="https://dribbble.com/claralangen">José <span className="AboutUs__bold">Guignery Teixeira</span></a> | {' '}
-                <a className="AboutUs__link" href="https://dribbble.com/claralangen">Clara <span className="AboutUs__bold">de Langenhagen</span></a> <br /> 
-                <a className="AboutUs__link" href="https://dribbble.com/claralangen">Adebayo <span className="AboutUs__bold">Hountondji</span></a> | {' '}
-                <a className="AboutUs__link" href="https://dribbble.com/claralangen">Maël <span className="AboutUs__bold">Allano</span></a> | {' '}
-                <a className="AboutUs__link" href="https://dribbble.com/claralangen">Rainald <span className="AboutUs__bold">Durand</span></a>
+                <a className="AboutUs__link" target="_blank" href="https://www.linkedin.com/in/joetxa">José <span className="AboutUs__bold">Guignery Teixeira</span></a> | {' '}
+                <a className="AboutUs__link" target="_blank" href="https://dribbble.com/claralangen">Clara <span className="AboutUs__bold">de Langenhagen</span></a> <br /> 
+                <a className="AboutUs__link" target="_blank" href="https://dribbble.com/claralangen">Adebayo <span className="AboutUs__bold">Hountondji</span></a> | {' '}
+                <a className="AboutUs__link" target="_blank" href="https://dribbble.com/claralangen">Maël <span className="AboutUs__bold">Allano</span></a> | {' '}
+                <a className="AboutUs__link" target="_blank" href="https://rainldrd.fr">Rainald <span className="AboutUs__bold">Durand</span></a>
             </p>
             <h5 className="AboutUs__linkBlue_title">Dataset source</h5>
-            <a className="AboutUs__linkBlue" href="https://www.kaggle.com/zynicide/wine-reviews">
+            <a className="AboutUs__linkBlue" target="_blank" href="https://www.kaggle.com/zynicide/wine-reviews">
                 <img src={kaggle} alt="kaggle" />
             </a>
         </div>
