@@ -42,36 +42,76 @@ class Tooltip extends Component {
                     bottom: 20,
                     left: "50%",
                     transform: "translateX(-50%)",
-                    background: "rgba(255, 255, 255, 0.4)",
+                    background: "#ffffff",
                     display: isOpen ? "block" : "none",
-                    borderRadius: 3,
+                    borderRadius: 10,
                     padding: 9,
                     boxSizing: "border-box",
-                    color: "rgba(0, 0, 0, 0.8)"
+                    minWidth: 300
                 }}>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-between",
                         marginBottom: 6
                     }}>
-                        <p style={{marginRight: 10}}>{name}</p>
+                        <p style={{
+                            marginRight: 10,
+                            fontFamily: "Karla",
+                            fontStyle: "normal",
+                            fontWeight: "bold",
+                            fontSize: 17
+                        }}>{name}</p>
                         <p onClick={() => closeTooltip()} style={{display: "flex", cursor: "pointer"}}>
-                            <svg id="Capa_1" x="0px" y="0px" viewBox="0 0 47.971 47.971" width="8px" height="8px">
-                                <g fill="rgba(0, 0, 0, 0.8)">
-                                    <path d="M28.228,23.986L47.092,5.122c1.172-1.171,1.172-3.071,0-4.242c-1.172-1.172-3.07-1.172-4.242,0L23.986,19.744L5.121,0.88   c-1.172-1.172-3.07-1.172-4.242,0c-1.172,1.171-1.172,3.071,0,4.242l18.865,18.864L0.879,42.85c-1.172,1.171-1.172,3.071,0,4.242   C1.465,47.677,2.233,47.97,3,47.97s1.535-0.293,2.121-0.879l18.865-18.864L42.85,47.091c0.586,0.586,1.354,0.879,2.121,0.879   s1.535-0.293,2.121-0.879c1.172-1.171,1.172-3.071,0-4.242L28.228,23.986z"/>
-                                </g>
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.66671 1.27325L8.72671 0.333252L5.00004 4.05992L1.27337 0.333252L0.333374 1.27325L4.06004 4.99992L0.333374 8.72659L1.27337 9.66659L5.00004 5.93992L8.72671 9.66659L9.66671 8.72659L5.94004 4.99992L9.66671 1.27325Z" fill="#30153E"/>
                             </svg>
                         </p>
                     </div>
                     <div style={{
                         display: "flex",
-                        justifyContent: "space-between"
+                        justifyContent: "space-between",
+                        alignItems: "flex-end",
+                        width: "100%"
                     }}>
                         <div>
-                            <span style={{marginRight: 10}}>{grade}/100</span>
-                            <span>{parseInt(price)}$</span>
+                            <span style={{
+                                fontFamily: "Muli",
+                                fontStyle: "normal",
+                                fontWeight: "bold",
+                                fontSize: 16,
+                                color: "#2E133C",
+                                marginRight: 21
+                            }}>{parseInt(price)}$</span>
+                            <span>
+                                <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 11.9525L12.635 14.75L11.405 9.4775L15.5 5.93L10.1075 5.465L8 0.5L5.8925 5.465L0.5 5.93L4.5875 9.4775L3.365 14.75L8 11.9525Z" fill="#F6C825"/>
+                                </svg>
+                                <span style={{
+                                    fontFamily: "Muli",
+                                    fontStyle: "normal",
+                                    fontWeight: "bold",
+                                    fontSize: 16,
+                                    color: "#2E133C",
+                                    marginRight: 2,
+                                    marginLeft: 1
+                                }}>{grade}</span>
+                                <span style={{
+                                    fontFamily: "Karla",
+                                    fontStyle: "normal",
+                                    fontWeight: "normal",
+                                    fontSize: 10,
+                                    opacity: 0.5
+                                }}>on WineEnthusiast</span>
+                            </span>
                         </div>
-                        <p style={{marginLeft: 10, cursor: "pointer"}} onClick={this.toggleRedirect}>see more</p>
+                        <p style={{
+                            cursor: "pointer",
+                            fontFamily: "Muli",
+                            fontStyle: "normal",
+                            fontWeight: "bold",
+                            fontSize: 12,
+                            color: "#F6C825"
+                        }} onClick={this.toggleRedirect}>see more</p>
                     </div>
                 </div>
             </Fragment>
